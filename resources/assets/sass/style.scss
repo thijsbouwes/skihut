@@ -1,0 +1,20 @@
+// Dependency
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+// Materialize colors
+@import "node_modules/materialize-css/sass/components/color-variables";
+
+// Variables
+@import "variables";
+
+// Materialize
+@import "node_modules/materialize-css/sass/materialize";
+
+// Core
+@import "core/navigation";
+@import "core/sidebar";
+@import "core/icons";
+@import "core/background";
+@import "core/card";
+@import "core/grid";
+@import "core/button";

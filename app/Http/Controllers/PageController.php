@@ -34,8 +34,8 @@ class PageController extends Controller
         return view('account.index');
     }
 
-    public function admin()
+    public function index()
     {
-        return view('page.admin');
+        return view('index');
     }
 }

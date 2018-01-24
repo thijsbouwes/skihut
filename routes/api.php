@@ -36,7 +36,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
         Route::patch('/stocks/{stock}', 'StockResource@update');
     });
 
-
     // Event
     Route::group(['prefix' => 'events'], function() {
         Route::get('/', 'EventResource@index');

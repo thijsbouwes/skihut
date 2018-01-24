@@ -1,0 +1,29 @@
+.house-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 5px;
+
+    .material-icons {
+        margin-right: 15px;
+    }
+
+    & > span {
+        display: inline-flex;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    .heater {
+        min-width: 50%;
+    }
+
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
+}
