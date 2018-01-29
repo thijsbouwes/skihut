@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\HelloWorld;
+use App\Http\Middleware\InjectClientSecretToRequest;
 use App\Http\Middleware\JsonApi;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -42,7 +43,8 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'json',
-            'bindings'
+            'bindings',
+            'injectSecret'
         ],
     ];
 
@@ -61,5 +63,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'json' => JsonApi::class,
+        'injectSecret' => InjectClientSecretToRequest::class
     ];
 }
