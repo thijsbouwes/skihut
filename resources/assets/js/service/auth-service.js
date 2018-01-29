@@ -4,7 +4,7 @@ let authRefreshTokenRequest;
 
 class AuthService {
     login(email, password) {
-        let data = {email, password};
+        let data = {username: email, password, grant_type: 'password'};
 
         // Login
         return request.post(ENDPOINTS.LOGIN, data)
@@ -17,8 +17,8 @@ class AuthService {
             });
     }
 
-    register(name, email, password) {
-        let data = {name, email, password};
+    register(name, email, password, password_confirmation) {
+        let data = {name, email, password, password_confirmation};
 
         // Register
         return request.post(ENDPOINTS.REGISTER, data)
@@ -72,7 +72,7 @@ class AuthService {
     }
 
     getToken() {
-        return "Token " + localStorage.getItem('token');
+        return "Bearer " + localStorage.getItem('token');
     }
 
     getRefreshToken() {

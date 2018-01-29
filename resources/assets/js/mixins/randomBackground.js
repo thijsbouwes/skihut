@@ -1,17 +1,16 @@
-import { mapGetters } from 'vuex';
+import { BACKGROUNDS } from '../config/background';
 
 export default {
-    computed: {
-        ...mapGetters({
-            backgrounds: 'backgrounds/backgrounds'
-        }),
+    data() {
+        return {
+            backgrounds: [],
+        }
+    },
 
+    computed: {
         randomBackground() {
             if (this.backgrounds.length > 0) {
-                // remove No background
-                let backgrounds = this.backgrounds.filter(background => background.id !== 1);
-
-                let background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+                let background = this.backgrounds[Math.floor(Math.random() * this.backgrounds.length)];
                 return `background-image: url(${ background.url });`;
             }
 
@@ -20,6 +19,6 @@ export default {
     },
 
     created() {
-        this.$store.dispatch('backgrounds/getAllBackgrounds');
+        this.backgrounds = BACKGROUNDS;
     }
 }

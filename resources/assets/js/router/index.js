@@ -52,9 +52,9 @@ router.beforeEach((to, from, next) => {
 
 // Check auth
 router.beforeEach((to, from, next) => {
-    // if (to.meta.requiresAuth && Auth.isLoggedIn() === false) {
-    //     next('/login');
-    // }
+    if (to.meta.requiresAuth && Auth.isLoggedIn() === false) {
+        next('/login');
+    }
     next();
 });
 

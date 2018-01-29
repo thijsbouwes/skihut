@@ -41,21 +41,21 @@
 
 export default {
     computed: {
-        user_name() {
-            return this.user.name;
-        },
-
-        user_email() {
-            return this.user.email;
-        },
-
-        ...mapState({
-            changed: state => state.profile.changed
-        }),
-
-        ...mapGetters({
-            user: 'profile/user'
-        })
+        // user_name() {
+        //     return this.user.name;
+        // },
+        //
+        // user_email() {
+        //     return this.user.email;
+        // },
+        //
+        // ...mapState({
+        //     changed: state => state.profile.changed
+        // }),
+        //
+        // ...mapGetters({
+        //     user: 'profile/user'
+        // })
     },
 
     created() {

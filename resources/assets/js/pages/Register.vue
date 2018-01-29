@@ -7,19 +7,25 @@
                     <div class="input-field">
                         <i class="material-icons prefix">face</i>
                         <label for="name">Name</label>
-                        <input id="name" v-model="user.name" type="text" class="validate" name="name" length="255" maxlength="255" required>
+                        <input id="name" v-model="name" type="text" class="validate" name="name" length="255" maxlength="255" required>
                     </div>
 
                     <div class="input-field">
                         <i class="material-icons prefix">mail_outline</i>
                         <label for="email">Email</label>
-                        <input id="email" v-model="user.email" type="email" class="validate" name="email" length="255" maxlength="255" required>
+                        <input id="email" v-model="email" type="email" class="validate" name="email" length="255" maxlength="255" required>
                     </div>
 
                     <div class="input-field">
                         <i class="material-icons prefix">lock_outline</i>
                         <label for="password">Password</label>
-                        <input id="password" v-model="user.password" type="password" class="validate" name="password" length="255" maxlength="255" minlength="8" required>
+                        <input id="password" v-model="password" type="password" class="validate" name="password" length="255" maxlength="255" minlength="8" required>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix">lock_outline</i>
+                        <label for="password_confirmation">Password confirmation</label>
+                        <input id="password_confirmation" v-model="password_confirmation" type="password" class="validate" name="password_confirmation" length="255" maxlength="255" minlength="8" required>
                     </div>
 
                     <div class="input-field center-align">
@@ -47,13 +53,16 @@
 
         data() {
             return {
-                user: {}
+                name: '',
+                email: '',
+                password: '',
+                password_confirmation: ''
             }
         },
 
         methods: {
             doSubmit() {
-                Auth.register(this.user.name, this.user.email, this.user.password)
+                Auth.register(this.name, this.email, this.password, this.password_confirmation)
                     .then(response => {
                         // Login and redirect
                         Auth.login(this.user.email, this.user.password)

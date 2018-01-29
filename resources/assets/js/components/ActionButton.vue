@@ -7,7 +7,6 @@
             <ul>
                 <li><a @click="getRemoteHouse" class="btn-floating green modal-trigger" href="#remote"><i class="material-icons">settings_remote</i></a></li>
                 <li><router-link class="btn-floating red" to="/news" exact><i class="material-icons">import_contacts</i></router-link></li>
-                <li><router-link class="btn-floating blue" v-show="is_admin" to="/users" exact><i class="material-icons">supervisor_account</i></router-link></li>
                 <li><a @click="toggleEdit" class="btn-floating yellow" href="#"><i class="material-icons">edit</i></a></li>
             </ul>
         </div>
@@ -29,12 +28,6 @@
             let elem = document.querySelector('.fixed-action-btn');
             let options = { direction: 'top', hoverEnabled: true, toolbarEnabled: false };
             let instance = new this.$M.FloatingActionButton(elem, options);
-        },
-
-        computed: {
-            ...mapGetters({
-                is_admin: 'profile/is_admin'
-            })
         },
 
         methods: {

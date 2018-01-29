@@ -1,4 +1,4 @@
-.nav-wrapper {
+nav .nav-wrapper {
 	.brand-logo {
 		display: flex;
 		align-items: center;
@@ -7,5 +7,10 @@
 			height: 50px;
 			padding-right: 10px;
 		}
+	}
+
+	.sidenav-trigger {
+		display: block;
+		margin: 0;
 	}
 }
