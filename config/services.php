@@ -35,4 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'tikkie' => [
+        'key' => env('TIKKIE_KEY'),
+        'url' => env('TIKKIE_URL')
+    ]
 ];

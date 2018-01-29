@@ -10,28 +10,28 @@ use Illuminate\Support\Facades\Storage;
 
 class TikkieResource
 {
-    const API_KEY = '6s3zE8Mxg6aH1Bwy7CWVa79m1eoBpwVu';
-    const API_URL = 'https://api.abnamro.com/v1/oauth/token';
-    const API_ISS = 'Thijs Bouwes';
+    const TOKEN_ENDPOINT = 'oauth/token';
 
     public function GetToken()
     {
-        $client = new Client();
+        $client = new Client([
+            'base_uri' => config('tikkie.url')
+        ]);
 
         $payload = [
             "exp" => Carbon::now()->addMinute(15)->getTimestamp(),
             "nbf" => Carbon::now()->getTimestamp(),
-            "iss" => self::API_ISS,
-            "sub" => self::API_KEY,
+            "iss" => config('app.name'),
+            "sub" => config('tikkie.key'),
             "aud" => 'https://auth-sandbox.abnamro.com/oauth/token'
         ];
 
         $signature = JWT::encode($payload, Storage::get('private_rsa.pem'), 'RS256');
 
         try {
-            $response = $client->post(self::API_URL, [
+            $response = $client->post(self::TOKEN_ENDPOINT, [
                 'headers' => [
-                    'API-Key' => self::API_KEY
+                    'API-Key' => config('tikkie.key')
                 ],
                 'form_params' => [
                     'client_assertion' => $signature,
