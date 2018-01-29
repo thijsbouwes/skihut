@@ -10,25 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
 
-Route::get('/', 'PageController@index')->name('index');
-
-//Route::get('/test', function() {
-//   return \App\Models\Product::all();
-//});
-
-//Route::group(['middleware' => 'auth'], function() {
-//    Route::get('/admin', 'PageController@admin')->name('dashboard');
-//    Route::get('/account', 'PageController@account')->name('account');
-//
-//    Route::get('/events', 'PageController@events')->name('events');
-//    Route::get('/users', 'PageController@users')->name('users');
-//    Route::get('/products', 'PageController@products')->name('products');
-//
-//    Route::get('/logout', 'Auth\LoginController@logout');
-//
-//    Route::get('/dashboard', function() {
-//        return view('page.dashboard');
-//    });
-//});
+Route::get('/{vue?}', 'PageController@index')
+    ->name('index')
+    ->where('vue', '[\/\w\.-]*');
