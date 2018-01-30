@@ -10,18 +10,15 @@
 |
 */
 
-Route::group(['namespace' => 'Api', 'middleware' => 'api'], function() {
-    Route::post('/register', 'UserResource@register');
-
-    Route::get('/tikkie', 'TikkieResource@GetToken');
-});
-
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     // Status
     Route::get('/', 'StatusController');
 
     // User
     Route::get('/user', 'UserResource@show');
+
+    // Register user
+    Route::post('/register', 'UserResource@register');
 
     // Product
     Route::group(['prefix' => 'products'], function() {
