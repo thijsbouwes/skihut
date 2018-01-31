@@ -5,8 +5,8 @@ export default {
         showErrors(error) {
             M.toast({ html: "Error: " + error.response.status + " " + error.response.data.message, classes: "red" });
 
-            for(let key in error.response.data) {
-                M.toast({ html: key + " : " + error.response.data.join(" | "), classes: "red" });
+            for(let key in error.response.data.errors) {
+                M.toast({ html: key + " : " + error.response.data.errors[key].join(', '), classes: "red" });
             }
         }
     }

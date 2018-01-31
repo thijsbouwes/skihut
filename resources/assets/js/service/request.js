@@ -17,7 +17,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(null, (error) => {
     let originalRequest = error.config;
 
-    if (error.response.status === HTTP_CODES.UNAUTHORIZED && !originalRequest._retry) {
+    if (error.response.status === HTTP_CODES.UNAUTHORIZED && !originalRequest._retry && originalRequest.url !== ENDPOINTS.BASE + ENDPOINTS.LOGIN_REFRESH) {
         console.warn("Access Token expired");
         originalRequest._retry = true;
 
