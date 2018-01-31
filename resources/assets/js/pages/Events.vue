@@ -1,8 +1,13 @@
 <template>
     <layout>
         <div class="row">
-            <div class="col s12 m6 l4 xl3">
-                <h3>Events</h3>
+            <div class="col s12 m6">
+                <span class="card-title">Events</span>
+                <data-table
+                    endpoint="events"
+                    :columns="columns"
+                ></data-table>
+
             </div>
         </div>
     </layout>
@@ -11,8 +16,21 @@
 <script>
     import Layout from '../layouts/main/Layout';
     import { ENDPOINTS } from '../config/api';
+    import DataTable from '../components/DataTable';
 
     export default {
-        components: { Layout },
+        components: {
+            DataTable,
+            Layout
+        },
+
+        data() {
+            return {
+                columns: [
+                    'name',
+                    'price'
+                ]
+            }
+        }
     }
 </script>

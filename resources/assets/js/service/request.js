@@ -26,6 +26,7 @@ axios.interceptors.response.use(null, (error) => {
                 // retry request, with new token
                 Auth.resetAuthRefreshTokenRequest();
                 originalRequest.headers['Authorization'] = Auth.getToken();
+                console.log(originalRequest);
                 return axios(originalRequest);
             })
             .catch(error => {
