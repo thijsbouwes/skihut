@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Listeners\NewUserWelcomeSendEmail;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -19,6 +21,10 @@ class EventServiceProvider extends ServiceProvider
 
         'Laravel\Passport\Events\RefreshTokenCreated' => [
             'App\Listeners\PruneOldTokens',
+        ],
+
+        Registered::class => [
+            NewUserWelcomeSendEmail::class
         ],
     ];
 
