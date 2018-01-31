@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <main class="main_content">
         <navigation></navigation>
         <sidebar></sidebar>
-        <section class="mainContent">
+        <section class="content">
             <slot></slot>
         </section>
-    </div>
+    </main>
 </template>
 
 <script>

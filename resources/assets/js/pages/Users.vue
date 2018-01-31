@@ -31,7 +31,6 @@
             </div>
         </div>
 
-        <go-back-button></go-back-button>
     </layout>
 </template>
 
@@ -51,22 +50,11 @@
         },
 
         methods: {
-            isAdmin(user) {
-                if (user.is_admin) {
-                    return '<i class="material-icons">check</i>'
-                }
 
-                return '<i class="material-icons">clear</i>'
-            }
         },
 
         created() {
-            this.$http.get(ENDPOINTS.USERS)
-                .then(response => {
-                    this.users = response.data.result;
-                    this.loading = false;
-                })
-                .catch(error => console.log(error));
+
         }
     }
 </script>

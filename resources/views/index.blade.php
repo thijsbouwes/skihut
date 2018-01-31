@@ -6,7 +6,7 @@
 
     <body>
         <!--content-->
-        <div id="app"></div>
+        <main id="app"></main>
     </body>
 
     @include('partials._javascript')

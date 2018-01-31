@@ -18,3 +18,15 @@
         padding-top: 10px;
     }
 }
+
+.main_content {
+    nav, .content {
+        padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+        nav, .content {
+            padding-left: 0;
+        }
+    }
+}

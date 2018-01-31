@@ -1,18 +1,18 @@
 <template>
-	<layout>
+    <layout>
         <div class="row">
             <div class="col s12 m6 l4 xl3">
-                <time-date></time-date>
+                <h3>Products</h3>
             </div>
         </div>
-	</layout>
+    </layout>
 </template>
 
 <script>
     import Layout from '../layouts/main/Layout';
-    import TimeDate from '../components/TimeDate';
+    import { ENDPOINTS } from '../config/api';
 
     export default {
-        components: {Layout, TimeDate},
+        components: { Layout },
     }
 </script>

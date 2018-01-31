@@ -16,7 +16,7 @@ class InjectClientSecretToRequest
     public function handle($request, Closure $next)
     {
         // Validate if the request is a password grant
-        if ($request->get('grant_type') === 'password') {
+        if ($request->get('grant_type') === 'password' || $request->get('grant_type') === 'refresh_token') {
             // Then adding the client secret so its not publicly visible
             $request->request->add([
                 'client_id' => config('auth.api.client_id'),

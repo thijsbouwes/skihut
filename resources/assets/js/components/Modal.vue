@@ -1,5 +1,5 @@
 <template>
-    <div :id="target_id" class="modal modal-fixed-footer">
+    <div :id="target_id" class="modal">
         <div class="modal-content">
             <slot>Default content</slot>
         </div>

@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import { store } from '../store';
 import Router from 'vue-router';
 import Dashboard from '../pages/Dashboard';
 import Users from '../pages/Users';
+import Events from '../pages/Events';
+import Products from '../pages/Products';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
@@ -25,6 +26,18 @@ export const router = new Router({
             name: 'Users',
             component: Users,
             meta: { requiresAuth: true, requiresAdmin: true }
+        },
+        {
+            path: '/events',
+            name: 'Events',
+            component: Events,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/products',
+            name: 'Products',
+            component: Products,
+            meta: { requiresAuth: true }
         },
         {
             path: '/login',

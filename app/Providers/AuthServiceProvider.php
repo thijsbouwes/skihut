@@ -30,7 +30,6 @@ class AuthServiceProvider extends ServiceProvider
         // Register only the routes we use
         $callback = function ($router) {
             $router->forAccessTokens();
-            $router->forTransientTokens();
         };
 
         Passport::routes($callback, ['prefix' => 'api/oauth', 'middleware' => ['json', 'injectSecret']]);
