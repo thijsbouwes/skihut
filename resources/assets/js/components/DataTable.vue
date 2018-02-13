@@ -4,13 +4,13 @@
             <thead>
                 <tr>
                     <th v-for="column in columns"
-                        v-text="column"
+                        v-text="column.name"
                     ></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="row in rows">
-                    <td v-for="column in columns">{{ row[column] }}</td>
+                    <td v-for="column in columns">{{ row[column.data_name] }}</td>
                 </tr>
             </tbody>
         </table>
@@ -40,6 +40,11 @@
             columns: {
                 required: true,
                 type: Array
+            },
+            actions: {
+                required: false,
+                type: Array,
+                default: []
             },
             endpoint: {
                 required: true,

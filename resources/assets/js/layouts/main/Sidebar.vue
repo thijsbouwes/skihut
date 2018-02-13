@@ -14,7 +14,7 @@
 
             <!--Page links-->
             <router-link tag="li" to="/" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
-            <router-link tag="li" to="/events" exact><a><i class="material-icons">event</i>Events</a></router-link>
+            <router-link tag="li" to="/events"><a><i class="material-icons">event</i>Events</a></router-link>
             <router-link tag="li" to="/products" exact><a><i class="material-icons">shopping_cart</i>Products</a></router-link>
             <router-link tag="li" to="/users" exact><a><i class="material-icons">supervisor_account</i>Users</a></router-link>
 

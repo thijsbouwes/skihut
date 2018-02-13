@@ -2,12 +2,14 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Dashboard from '../pages/Dashboard';
 import Users from '../pages/Users';
-import Events from '../pages/Events';
+import Events from '../pages/events';
+import CreateEvent from '../pages/events/Create';
 import Products from '../pages/Products';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Auth from '../service/auth-service';
+import CrudLayout from '../layouts/main/CrudLayout';
 
 Vue.use(Router);
 
@@ -29,9 +31,25 @@ export const router = new Router({
         },
         {
             path: '/events',
-            name: 'Events',
-            component: Events,
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true },
+            component: CrudLayout,
+            children: [
+                {
+                    path: '',
+                    name: 'Events',
+                    component: Events,
+                },
+                {
+                    path: 'create',
+                    name: 'create.event',
+                    component: CreateEvent
+                },
+                {
+                    path: 'update/:id',
+                    name: 'update.event',
+                    component: CreateEvent
+                }
+            ]
         },
         {
             path: '/products',
@@ -59,7 +77,11 @@ export const router = new Router({
 
 // Set meta title
 router.beforeEach((to, from, next) => {
-    document.title = 'Home Comfort | ' + to.name;
+    // change name.route to Name route
+    let name = to.name.split('.').join(' ');
+    name = name.charAt(0).toUpperCase() + name.slice(1);
+
+    document.title = 'Home Comfort | ' + name;
     next();
 });
 
