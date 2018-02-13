@@ -1,5 +1,11 @@
 <template>
     <div>
+        <span class="card-title">{{ this.endpoint | capitalize }}
+            <router-link :to="{ name: this.endpoint + '.create' }" class="waves-effect waves-light btn right">
+                <i class="material-icons right">add</i>create
+            </router-link>
+        </span>
+
         <table class="striped responsive-table">
             <thead>
                 <tr>
@@ -43,8 +49,6 @@
     </div>
 </template>
 <script>
-    import { ENDPOINTS } from '../config/api';
-
     export default {
         props: {
             columns: {
@@ -81,7 +85,7 @@
 
         methods: {
             deleteRow(row) {
-                this.$http.delete(ENDPOINTS.EVENTS + '/' + row.id)
+                this.$http.delete(this.endpoint + '/' + row.id)
                     .then(() => {
                         let indexDeleted = this.rows.indexOf(row);
                         this.rows.splice(indexDeleted, 1);

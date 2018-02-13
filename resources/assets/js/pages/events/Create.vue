@@ -1,5 +1,5 @@
 <template>
-    <div class="card-content">
+    <div>
         <span class="card-title">Create event</span>
         <event></event>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <data-table
-        endpoint="events"
+        endpoint="products"
         :columns="columns"
     ></data-table>
 </template>

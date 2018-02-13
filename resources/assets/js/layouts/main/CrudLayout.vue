@@ -1,7 +1,9 @@
 <template>
     <layout>
         <div class="card data">
-            <router-view/>
+            <div class="card-content">
+                <router-view/>
+            </div>
         </div>
     </layout>
 </template>

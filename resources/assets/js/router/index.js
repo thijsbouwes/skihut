@@ -4,7 +4,8 @@ import Dashboard from '../pages/Dashboard';
 import Users from '../pages/Users';
 import Events from '../pages/events';
 import CreateEvent from '../pages/events/Create';
-import Products from '../pages/Products';
+import UpdateEvent from '../pages/events/Update';
+import Products from '../pages/products';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
@@ -47,15 +48,22 @@ export const router = new Router({
                 {
                     path: 'update/:id',
                     name: 'events.update',
-                    component: CreateEvent
+                    component: UpdateEvent
                 }
             ]
         },
         {
             path: '/products',
             name: 'Products',
-            component: Products,
-            meta: { requiresAuth: true }
+            component: CrudLayout,
+            meta: { requiresAuth: true },
+            children: [
+                {
+                    path: '',
+                    name: 'products',
+                    component: Products,
+                }
+            ]
         },
         {
             path: '/login',

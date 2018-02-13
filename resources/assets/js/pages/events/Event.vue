@@ -15,7 +15,7 @@
 
             <div class="input-field col s12 m3 l4">
                 <i class="material-icons prefix">event</i>
-                <input type="text" class="datepicker" v-model="event.date" required>
+                <input type="text" class="datepicker" v-model="event.created_at" required>
             </div>
         </div>
 
@@ -30,17 +30,17 @@
             <div class="col s12 m6 l6" v-for="(number, index) in number_of_users" :id="index">
                 <div class="row">
                     <div class="input-field col s8 m8 l10">
-                        <select v-model="event.users[index]" required>
-                            <option value="" disabled selected>Choose your option</option>
-                            <option v-for="user in users" :value="user.name">{{ user.name }}</option>
-                        </select>
+                        <!--<select v-model="event.users[index]" required>-->
+                            <!--<option value="" disabled selected>Choose your option</option>-->
+                            <!--<option v-for="user in users" :value="user.name">{{ user.name }}</option>-->
+                        <!--</select>-->
                         <label>User {{ number }}</label>
                     </div>
 
                     <div class="input-field col s4 m4 l2">
                         <p>
                             <label>
-                                <input type="checkbox" class="filled-in" v-model="event.users[index]"/>
+                                <!--<input type="checkbox" class="filled-in" v-model="event.users[index]"/>-->
                                 <span>Payed</span>
                             </label>
                         </p>
@@ -93,17 +93,23 @@
     export default {
         mixins: [ValidationErrors],
 
-        data() {
-            return {
-                number_of_users: 2,
-                number_of_products: 0,
-                event: {
+        props: {
+            event: {
+                type: Object,
+                default: {
                     name: "Skihut",
                     date: "",
                     price: 10,
                     users: [],
                     products: [],
-                },
+                }
+            }
+        },
+
+        data() {
+            return {
+                number_of_users: 2,
+                number_of_products: 0,
                 products: [
                     {
                         name: "Heineken",
