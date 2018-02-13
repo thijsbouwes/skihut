@@ -36,17 +36,17 @@ export const router = new Router({
             children: [
                 {
                     path: '',
-                    name: 'Events',
+                    name: 'events',
                     component: Events,
                 },
                 {
                     path: 'create',
-                    name: 'create.event',
+                    name: 'events.create',
                     component: CreateEvent
                 },
                 {
                     path: 'update/:id',
-                    name: 'update.event',
+                    name: 'events.update',
                     component: CreateEvent
                 }
             ]

@@ -6,11 +6,19 @@
                     <th v-for="column in columns"
                         v-text="column.name"
                     ></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="row in rows">
                     <td v-for="column in columns">{{ row[column.data_name] }}</td>
+                    <td width="150px">
+                        <router-link v-if="!row.deleted" :to="{ name: endpoint + '.update', params: { id: row.id }}" class="waves-effect waves-white btn-small">
+                            <i class="material-icons">edit</i>
+                        </router-link>
+                        <a v-if="!row.deleted" class="waves-effect waves-white btn-small" @click="$set(row, 'deleted', true)"><i class="material-icons">delete</i></a>
+                        <a v-if="row.deleted" @click="deleteRow(row)" class="waves-effect waves-white btn red">Confirm</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -35,16 +43,13 @@
     </div>
 </template>
 <script>
+    import { ENDPOINTS } from '../config/api';
+
     export default {
         props: {
             columns: {
                 required: true,
                 type: Array
-            },
-            actions: {
-                required: false,
-                type: Array,
-                default: []
             },
             endpoint: {
                 required: true,
@@ -75,6 +80,14 @@
         },
 
         methods: {
+            deleteRow(row) {
+                this.$http.delete(ENDPOINTS.EVENTS + '/' + row.id)
+                    .then(() => {
+                        let indexDeleted = this.rows.indexOf(row);
+                        this.rows.splice(indexDeleted, 1);
+                    });
+            },
+
             move(page_number) {
                 if (this.current_page === page_number || page_number < 1 || page_number > this.last_page) {
                     console.log(`error at page ${page_number}`);
