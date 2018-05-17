@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExpensesTable extends Migration
+class CreateEventProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -41,10 +41,10 @@ class CreateExpensesTable extends Migration
      */
     public function down()
     {
-        Schema::table('expenses', function(Blueprint $table) {
+        Schema::table('event_product', function(Blueprint $table) {
             $table->dropForeign('event_product_id_foreign');
             $table->dropForeign('event_product_id_foreign');
         });
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('event_product');
     }
 }

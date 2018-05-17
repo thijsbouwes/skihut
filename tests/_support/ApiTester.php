@@ -28,12 +28,12 @@ class ApiTester extends \Codeception\Actor
             'email' => 'test@example.org',
             'password' => bcrypt('12345678')
         ]);
-        $clientId =$this->haveRecord('oauth_clients', [
-            'user_id' => 1,
+        $clientId = $this->haveRecord('oauth_clients', [
+            'user_id' => null,
             'name' => 'Dummy Client One',
             'secret' => '12345678',
-            'redirect' => 'http://www.example.org/redirect',
-            'personal_access_client' => 1,
+            'redirect' => 'http://localhost',
+            'personal_access_client' => 0,
             'password_client' => 1,
             'revoked' => 0,
         ]);

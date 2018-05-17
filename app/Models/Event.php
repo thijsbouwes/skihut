@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $with = [
+        'products',
+        'users'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,14 +26,18 @@ class Event extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)
+            ->withPivot('payed_price', 'payed_date')
+            ->withTimestamps();
     }
 
     /**
-     * Get the expenses for the product.
+     * Get the event products.
      */
-    public function expenses()
+    public function products()
     {
-        return $this->hasMany(Expense::class);
+        return $this->belongsToMany(Product::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 }

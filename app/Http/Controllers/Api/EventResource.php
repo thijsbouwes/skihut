@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class EventResource extends Controller
      */
     public function index()
     {
-        $events = Event::paginate();
+        $events = Event::orderBy('created_at', 'DESC')->paginate();
 
         return new JsonResponse($events);
     }
@@ -42,9 +43,11 @@ class EventResource extends Controller
             $createRequest->all()
         );
 
+        $this->syncUsers($createRequest->get('users'), $event);
+        $this->syncProducts($createRequest->get('products'), $event);
+
         return new JsonResponse($event, Response::HTTP_CREATED);
     }
-
 
     /**
      * Update the specified resource in storage
@@ -58,18 +61,60 @@ class EventResource extends Controller
             $updateRequest->all()
         );
 
+        $this->syncUsers($updateRequest->get('users'), $event);
+        $this->syncProducts($updateRequest->get('products'), $event);
+
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
+
 
     /**
      * Remove the specified resource from storage.
      * @param Event $event
      * @return JsonResponse
+     * @throws \Exception
      */
     public function destroy(Event $event)
     {
         $event->delete();
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+
+
+    /**
+     * @param $users_request
+     * @param $event
+     */
+    private function syncUsers($users_request, $event)
+    {
+        // create users for event
+        $users = collect($users_request)->mapWithKeys(function($user) {
+            return [
+                $user['id'] => [
+                    'payed_date'  => $user['payed'] ? Carbon::now() : null
+                ]
+            ];
+        })->toArray();
+
+        $event->users()->sync($users);
+    }
+
+    /**
+     * @param $products_request
+     * @param $event
+     */
+    private function syncProducts($products_request, $event)
+    {
+        // create product expenses
+        $products = collect($products_request)->mapWithKeys(function($product) {
+            return [
+                $product['id'] => [
+                    'quantity' => $product['quantity']
+                ]
+            ];
+        })->toArray();
+
+        $event->products()->sync($products);
     }
 }

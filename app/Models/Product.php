@@ -28,9 +28,9 @@ class Product extends Model
     /**
      * Get the expenses for the product.
      */
-    public function expenses()
+    public function events()
     {
-        return $this->hasMany(Expense::class);
+        return $this->belongsToMany(Event::class);
     }
 
     /**

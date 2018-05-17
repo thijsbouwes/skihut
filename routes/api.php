@@ -9,16 +9,18 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
+Route::group(['namespace' => 'Api'], function() {
     // Status
     Route::get('/', 'StatusController');
 
-    // User
-    Route::get('/user', 'UserResource@show');
-
     // Register user
     Route::post('/register', 'UserResource@register');
+});
+
+Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
+    // User
+    Route::get('/user', 'UserResource@show');
+    Route::get('/users', 'UserResource@index');
 
     // Product
     Route::group(['prefix' => 'products'], function() {

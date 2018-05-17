@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Auth;
 class UserResource extends Controller
 {
     /**
+     * Display a listing of the resource.
+     * @return JsonResponse
+     */
+    public function index()
+    {
+        $users = User::paginate();
+
+        return new JsonResponse($users);
+    }
+
+    /**
      * Display the specified resource.
      * @return JsonResponse
      */

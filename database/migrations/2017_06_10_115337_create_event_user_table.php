@@ -17,6 +17,8 @@ class CreateEventUserTable extends Migration
             $table->increments('id');
             $table->integer('event_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->float('payed_price', 10, 2)->nullable();
+            $table->dateTime('payed_date')->nullable();
             $table->timestamps();
 
             $table->foreign('event_id')

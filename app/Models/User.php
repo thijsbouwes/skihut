@@ -33,7 +33,9 @@ class User extends Authenticatable
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class)->withTimestamps();
+        return $this->belongsToMany(Event::class)
+            ->withPivot('payed_price', 'payed_date')
+            ->withTimestamps();
     }
 
     /**

@@ -40,7 +40,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name' => 'Thijs Bouwes',
         'email' => 'thijsbouwes@gmail.com',
-        'password' => bcrypt('secret'),
+        'password' => 'secret',
         'remember_token' => str_random(10),
     ];
 }, 'admin');
@@ -57,25 +57,7 @@ $factory->define(Product::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        'price' => $faker->randomFloat(2, 5, 100),
-        'parameters' => [['id' => $faker->randomDigit()], ['id' => $faker->randomDigit()]]
-    ];
-});
-
-$factory->define(EventUser::class, function (Faker\Generator $faker) {
-
-    return [
-        'event_id' => $faker->numberBetween(1, NUMBER_OF_RECORDS),
-        'user_id' => $faker->numberBetween(1, NUMBER_OF_RECORDS)
-    ];
-});
-
-$factory->define(Expense::class, function (Faker\Generator $faker) {
-
-    return [
-        'event_id' => $faker->numberBetween(1, NUMBER_OF_RECORDS),
-        'product_id' => $faker->numberBetween(1, NUMBER_OF_RECORDS),
-        'quantity' => $faker->randomFloat(2, 5, 100)
+        'price' => $faker->randomFloat(2, 5, 100)
     ];
 });
 

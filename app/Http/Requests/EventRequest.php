@@ -24,8 +24,14 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'price' => 'required|numeric'
+            'name'     => 'required|max:255',
+            'price'    => 'required|numeric',
+            'products' => 'array',
+                'products.*.id'       => 'required|exists:products,id',
+                'products.*.quantity' => 'required|numeric',
+            'users' => 'array',
+                'users.*.id'    => 'required|exists:users,id',
+                'users.*.payed' => 'required|bool'
         ];
     }
 }
