@@ -45,11 +45,12 @@
 <script>
     import ExternalLayout from '../layouts/external/Layout';
     import RandomBackground from '../mixins/randomBackground';
+    import ValidationError from '../mixins/validationError';
     import Auth from '../service/auth-service';
 
     export default {
         components: { ExternalLayout },
-        mixins: [RandomBackground],
+        mixins: [RandomBackground, ValidationError],
 
         data() {
             return {
@@ -64,8 +65,8 @@
             doSubmit() {
                 Auth.register(this.name, this.email, this.password, this.password_confirmation)
                     .then(response => {
-                        // Login and redirect
-                        Auth.login(this.user.email, this.user.password)
+                        // Login and redirects
+                        Auth.login(this.email, this.password)
                             .then(response => {
                                 this.$router.push('/')
                             })
@@ -76,7 +77,9 @@
                     })
                     .catch(error => {
                         // Show error
-                        this.$M.toast({ html: "Error: " + error.response.status + ", " + error.response.data, classes: "red" });
+                        console.log(error);
+                        this.showErrors(error);
+                        // /this.$M.toast({ html: "Error: " + error.response.status + ", " + error.response.data, classes: "red" });
                     });
             }
         }

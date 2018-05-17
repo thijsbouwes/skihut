@@ -10,7 +10,7 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Auth from '../service/auth-service';
-import CrudLayout from '../layouts/main/CrudLayout';
+import Layout from '../layouts/main/Layout';
 
 Vue.use(Router);
 
@@ -33,7 +33,7 @@ export const router = new Router({
         {
             path: '/events',
             meta: { requiresAuth: true },
-            component: CrudLayout,
+            component: Layout,
             children: [
                 {
                     path: '',
@@ -55,7 +55,7 @@ export const router = new Router({
         {
             path: '/products',
             name: 'Products',
-            component: CrudLayout,
+            component: Layout,
             meta: { requiresAuth: true },
             children: [
                 {

@@ -56,7 +56,7 @@
                     })
                     .catch(error => {
                         // Show error
-                        this.$M.toast({ html: "Error: " + error.response.status + ", " + error.response.data, classes: "red" });
+                        this.$M.toast({ html: "Error: " + error.response.status + ", " + error.response.data.message, classes: "red" });
                     });
             }
         }

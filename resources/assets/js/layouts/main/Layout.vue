@@ -2,9 +2,8 @@
     <main class="main_content">
         <navigation></navigation>
         <sidebar></sidebar>
-        <section class="content">
-            <slot></slot>
-        </section>
+        <router-view></router-view>
+        <slot></slot>
     </main>
 </template>
 

@@ -1,5 +1,7 @@
 import { ENDPOINTS } from '../config/api';
 import request from './request';
+import moment from 'moment';
+
 let authRefreshTokenRequest;
 
 class AuthService {
@@ -9,8 +11,8 @@ class AuthService {
         // Login
         return request.post(ENDPOINTS.LOGIN, data)
             .then(response => {
-                this.updateTokens(response.data.access_token, response.data.refresh_token);
-                return Promise.resolve(data);
+                this.updateTokens(response.data);
+                return Promise.resolve(response);
             })
             .catch(error => {
                 return Promise.reject(error);
@@ -34,7 +36,7 @@ class AuthService {
         // Get refresh token
         return request.post(ENDPOINTS.LOGIN_REFRESH, {refresh_token: this.getRefreshToken(), grant_type: 'refresh_token'})
             .then(response => {
-                this.updateTokens(response.data.access_token, response.data.refresh_token);
+                this.updateTokens(response.data);
                 return Promise.resolve(response);
             })
             .catch(error => {
@@ -58,7 +60,9 @@ class AuthService {
     }
 
     isLoggedIn() {
-        return Boolean(localStorage.getItem('token'));
+        let is_expired = moment().isSameOrBefore(localStorage.getItem('token_expires_in'));
+
+        return Boolean(localStorage.getItem('token')) && is_expired;
     }
 
     logout() {
@@ -66,9 +70,10 @@ class AuthService {
         localStorage.removeItem('refresh_token');
     }
 
-    updateTokens(token, refreshToken) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('refresh_token', refreshToken);
+    updateTokens(data) {
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('token_expires_in', moment().add(data.expires_in, 'seconds').format());
+        localStorage.setItem('refresh_token', data.refresh_token);
     }
 
     getToken() {

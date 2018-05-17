@@ -1,50 +1,55 @@
 <template>
-    <div>
-        <span class="card-title">{{ this.endpoint | capitalize }}
-            <router-link :to="{ name: this.endpoint + '.create' }" class="waves-effect waves-light btn right">
-                <i class="material-icons right">add</i>create
-            </router-link>
-        </span>
+    <div class="card">
+        <div class="card-content">
 
-        <table class="striped responsive-table">
-            <thead>
-                <tr>
-                    <th v-for="column in columns"
-                        v-text="column.name"
-                    ></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="row in rows">
-                    <td v-for="column in columns">{{ row[column.data_name] }}</td>
-                    <td width="150px">
-                        <router-link v-if="!row.deleted" :to="{ name: endpoint + '.update', params: { id: row.id }}" class="waves-effect waves-white btn-small">
-                            <i class="material-icons">edit</i>
-                        </router-link>
-                        <a v-if="!row.deleted" class="waves-effect waves-white btn-small" @click="$set(row, 'deleted', true)"><i class="material-icons">delete</i></a>
-                        <a v-if="row.deleted" @click="deleteRow(row)" class="waves-effect waves-white btn red">Confirm</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <span class="card-title">
+                {{ this.endpoint | capitalize }}
 
-        <ul class="pagination">
-            <li :class="[back ? 'waves-effect' : 'disabled']">
-                <a @click="move(current_page - 1)" href="#!"><i class="material-icons">chevron_left</i></a>
-            </li>
+                <router-link :to="{ name: this.endpoint + '.create' }" class="waves-effect waves-light btn right">
+                    <i class="material-icons right">add</i>create
+                </router-link>
+            </span>
 
-            <li v-for="page in last_page" :class="{ 'active': current_page === page, 'waves-effect': current_page !== page}">
-                <a @click="move(page)" href="#!">{{ page }}</a>
-            </li>
+            <table class="striped responsive-table">
+                <thead>
+                    <tr>
+                        <th v-for="column in columns"
+                            v-text="column.name"
+                        ></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="row in rows">
+                        <td v-for="column in columns">{{ row[column.data_name] }}</td>
+                        <td width="150px">
+                            <router-link v-if="!row.deleted" :to="{ name: endpoint + '.update', params: { id: row.id }}" class="waves-effect waves-white btn-small">
+                                <i class="material-icons">edit</i>
+                            </router-link>
+                            <a v-if="!row.deleted" class="waves-effect waves-white btn-small" @click="$set(row, 'deleted', true)"><i class="material-icons">delete</i></a>
+                            <a v-if="row.deleted" @click="deleteRow(row)" class="waves-effect waves-white btn red">Confirm</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <li :class="[forward ? 'waves-effect' : 'disabled']">
-                <a @click="move(current_page + 1)" href="#!"><i class="material-icons">chevron_right</i></a>
-            </li>
-        </ul>
+            <ul class="pagination">
+                <li :class="[back ? 'waves-effect' : 'disabled']">
+                    <a @click="move(current_page - 1)" href="#!"><i class="material-icons">chevron_left</i></a>
+                </li>
 
-        <div class="progress" v-show="loading">
-            <div class="indeterminate"></div>
+                <li v-for="page in last_page" :class="{ 'active': current_page === page, 'waves-effect': current_page !== page}">
+                    <a @click="move(page)" href="#!">{{ page }}</a>
+                </li>
+
+                <li :class="[forward ? 'waves-effect' : 'disabled']">
+                    <a @click="move(current_page + 1)" href="#!"><i class="material-icons">chevron_right</i></a>
+                </li>
+            </ul>
+
+            <div class="progress" v-show="loading">
+                <div class="indeterminate"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -63,6 +68,7 @@
 
         data() {
             return {
+                search: "",
                 loading: true,
                 current_page: 1,
                 last_page: 1,

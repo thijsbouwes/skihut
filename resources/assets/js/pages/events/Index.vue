@@ -1,15 +1,19 @@
 <template>
-    <data-table
-        endpoint="events"
-        :columns="columns"
-    ></data-table>
+    <section>
+        <data-table
+            endpoint="events"
+            :columns="columns"
+        ></data-table>
+    </section>
 </template>
 
 <script>
     import DataTable from '../../components/DataTable';
+    import Layout from "../../layouts/main/Layout";
 
     export default {
         components: {
+            Layout,
             DataTable
         },
 

@@ -1,11 +1,13 @@
 <template>
-	<layout>
-        <div class="row">
-            <div class="col s12 m6 l4 xl3">
-                <time-date></time-date>
+    <layout>
+        <section>
+            <div class="row">
+                <div class="col s12 m6 l4 xl3">
+                    <time-date></time-date>
+                </div>
             </div>
-        </div>
-	</layout>
+        </section>
+    </layout>
 </template>
 
 <script>

@@ -1,9 +1,7 @@
 <template>
     <div>
         <navigation></navigation>
-        <section class="externalContent">
-            <slot></slot>
-        </section>
+        <slot></slot>
     </div>
 </template>
 
