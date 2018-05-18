@@ -16,7 +16,7 @@ class ProductResource extends Controller
      */
     public function index()
     {
-        $products = Product::paginate();
+        $products = Product::orderby('created_at', 'DESC')->paginate();
 
         return new JsonResponse($products);
     }

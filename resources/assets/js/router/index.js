@@ -6,6 +6,8 @@ import Events from '../pages/events';
 import CreateEvent from '../pages/events/Create';
 import UpdateEvent from '../pages/events/Update';
 import Products from '../pages/products';
+import CreateProduct from '../pages/products/Create';
+import UpdateProduct from '../pages/products/Update';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
@@ -54,7 +56,6 @@ export const router = new Router({
         },
         {
             path: '/products',
-            name: 'Products',
             component: Layout,
             meta: { requiresAuth: true },
             children: [
@@ -62,6 +63,16 @@ export const router = new Router({
                     path: '',
                     name: 'products',
                     component: Products,
+                },
+                {
+                    path: 'create',
+                    name: 'products.create',
+                    component: CreateProduct
+                },
+                {
+                    path: 'update/:id',
+                    name: 'products.update',
+                    component: UpdateProduct
                 }
             ]
         },

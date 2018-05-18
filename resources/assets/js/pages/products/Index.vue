@@ -1,8 +1,10 @@
 <template>
-    <data-table
-        endpoint="products"
-        :columns="columns"
-    ></data-table>
+    <section>
+        <data-table
+            endpoint="products"
+            :columns="columns"
+        ></data-table>
+    </section>
 </template>
 
 <script>
