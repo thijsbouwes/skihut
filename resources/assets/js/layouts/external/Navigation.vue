@@ -5,7 +5,6 @@
                 <a href="#!" class="brand-logo center"><img src="/images/skihut_logo.png"> Comfort</a>
                 <ul class="right hide-on-med-and-down">
                     <router-link tag="li" to="/login" exact><a>Login</a></router-link>
-                    <router-link tag="li" to="/register" exact><a>Register</a></router-link>
                 </ul>
             </div>
         </nav>

@@ -14,6 +14,8 @@ class NewUserWelcome extends Mailable implements ShouldQueue
 
     public $user;
 
+    public $token;
+
     /**
      * Create a new message instance.
      *
@@ -22,6 +24,9 @@ class NewUserWelcome extends Mailable implements ShouldQueue
     public function __construct(User $user)
     {
         $this->user = $user;
+
+        // Generate a new reset password token
+        $this->token = app('auth.password.broker')->createToken($user);
     }
 
     /**

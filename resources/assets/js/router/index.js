@@ -2,14 +2,15 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Dashboard from '../pages/Dashboard';
 import Users from '../pages/Users';
+import CreateUser from '../pages/Users/Create';
 import Events from '../pages/events';
 import CreateEvent from '../pages/events/Create';
 import UpdateEvent from '../pages/events/Update';
 import Products from '../pages/products';
 import CreateProduct from '../pages/products/Create';
 import UpdateProduct from '../pages/products/Update';
-import Register from '../pages/Register';
 import Login from '../pages/Login';
+import Confirm from '../pages/Users/Confirm';
 import NotFound from '../pages/NotFound';
 import Auth from '../service/auth-service';
 import Layout from '../layouts/main/Layout';
@@ -28,13 +29,24 @@ export const router = new Router({
         },
         {
             path: '/users',
-            name: 'Users',
-            component: Users,
-            meta: { requiresAuth: true, requiresAdmin: true }
+            meta: { requiresAuth: true, requiresAdmin: true },
+            component: Layout,
+            children: [
+                {
+                    path: '',
+                    name: 'users',
+                    component: Users,
+                },
+                {
+                    path: 'create',
+                    name: 'users.create',
+                    component: CreateUser
+                }
+            ]
         },
         {
             path: '/events',
-            meta: { requiresAuth: true },
+            meta: { requiresAuth: true, requiresAdmin: true },
             component: Layout,
             children: [
                 {
@@ -57,7 +69,7 @@ export const router = new Router({
         {
             path: '/products',
             component: Layout,
-            meta: { requiresAuth: true },
+            meta: { requiresAuth: true, requiresAdmin: true },
             children: [
                 {
                     path: '',
@@ -82,9 +94,9 @@ export const router = new Router({
             component: Login
         },
         {
-            path: '/register',
-            name: 'Register',
-            component: Register
+            path: '/confirm/:token',
+            name: 'confirm',
+            component: Confirm
         },
         {
             path: '*',

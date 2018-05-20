@@ -5,7 +5,10 @@
             <span class="card-title">
                 {{ this.endpoint | capitalize }}
 
-                <router-link :to="{ name: this.endpoint + '.create' }" class="waves-effect waves-light btn right">
+                <router-link
+                        :to="{ name: this.endpoint + '.create' }"
+                        v-if="actions.create"
+                        class="waves-effect waves-light btn right">
                     <i class="material-icons right">add</i>create
                 </router-link>
             </span>
@@ -16,13 +19,13 @@
                         <th v-for="column in columns"
                             v-text="column.name"
                         ></th>
-                        <th></th>
+                        <th v-if="actions.edit"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="row in rows">
                         <td v-for="column in columns">{{ row[column.data_name] }}</td>
-                        <td width="150px">
+                        <td width="150px" v-if="actions.edit">
                             <router-link v-if="!row.deleted" :to="{ name: endpoint + '.update', params: { id: row.id }}" class="waves-effect waves-white btn-small">
                                 <i class="material-icons">edit</i>
                             </router-link>
@@ -63,6 +66,17 @@
             endpoint: {
                 required: true,
                 type: String
+            },
+            actions: {
+                required: false,
+                type: Object,
+                default: function() {
+                    return {
+                        update: true,
+                        delete: true,
+                        create: true
+                    }
+                }
             }
         },
 

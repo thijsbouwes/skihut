@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UserResource extends Controller
 {
@@ -29,14 +30,16 @@ class UserResource extends Controller
      */
     public function show() {
         $user = Auth::user();
+
         return new JsonResponse($user);
     }
 
     public function register(RegisterRequest $register_request)
     {
-        $user = User::create(
-            $register_request->validated()
-        );
+        $user = User::create(array_merge(
+            $register_request->validated(),
+            ['password' => str_random(35)]
+        ));
 
         event(new Registered($user));
 

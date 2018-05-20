@@ -9,18 +9,43 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+//Auth::routes();
+
+Route::get('/test-reset', function() {
+    //$this->validateEmail($request);
+
+    // We will send the password reset link to this user. Once we have attempted
+    // to send the link, we will examine the response then see the message we
+    // need to show to the user. Finally, we'll send out a proper response.
+    $response = \Illuminate\Support\Facades\Password::broker()->sendResetLink(['email' => 'info@computer4life.nl']);
+    dd($response);
+
+    return $response == Password::RESET_LINK_SENT
+        ? $this->sendResetLinkResponse($response)
+        : $this->sendResetLinkFailedResponse($request, $response);
+});
+
+// password reset routes
+Route::group(['namespace' => 'Auth', 'prefix' => 'password'], function() {
+    Route::post('/email', 'ForgotPasswordController@sendResetLinkEmail');
+    Route::post('/reset', 'ResetPasswordController@reset');
+});
+
 Route::group(['namespace' => 'Api'], function() {
     // Status
     Route::get('/', 'StatusController');
-
-    // Register user
-    Route::post('/register', 'UserResource@register');
 });
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     // User
     Route::get('/user', 'UserResource@show');
-    Route::get('/users', 'UserResource@index');
+
+    // users
+    Route::group(['prefix' => 'users'], function() {
+        Route::get('/', 'UserResource@index');
+        Route::post('/', 'UserResource@register');
+    });
 
     // Product
     Route::group(['prefix' => 'products'], function() {
@@ -45,12 +70,5 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
         Route::delete('/{event}', 'EventResource@destroy');
         Route::patch('/{event}', 'EventResource@update');
         Route::post('/', 'EventResource@store');
-
-        // Event Expense
-        Route::get('/{event}/expenses', 'ExpenseResource@index');
-        Route::post('/{event}/expenses', 'ExpenseResource@store');
-        Route::get('/expenses/{expense}', 'ExpenseResource@show');
-        Route::delete('/expenses/{expense}', 'ExpenseResource@destroy');
-        Route::patch('/expenses/{expense}', 'ExpenseResource@update');
     });
 });

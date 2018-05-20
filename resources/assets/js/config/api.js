@@ -1,11 +1,13 @@
 export const ENDPOINTS = {
     BASE: 'https://skihut.dev/api/',
-    REGISTER: 'register',
     LOGIN: 'oauth/token',
     LOGIN_REFRESH: 'oauth/token',
+    PASSWORD_RESET: 'password/reset',
+    FORGOT_PASSWORD: 'password/email',
     EVENTS: 'events',
     PRODUCTS: 'products',
-    USERS: 'users'
+    USERS: 'users',
+    USER: 'user'
 };
 
 export const HTTP_CODES = {
