@@ -48,12 +48,8 @@
             doSubmit() {
                 this.$http.post(ENDPOINTS.FORGOT_PASSWORD, this.user)
                     .then(response => {
-                        console.log(response.data);
-                    })
-                    .catch(error => {
-                        // Redirect
-                        this.$router.push('/');
-                        this.$M.toast({ html: "Invalid token", classes: "red" });
+                        this.$router.push('/login');
+                        this.$M.toast({ html: "Check your email", classes: "green" });
                     })
             }
         }

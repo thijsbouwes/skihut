@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -14,7 +15,7 @@ class NewUserWelcome extends Mailable implements ShouldQueue
 
     public $user;
 
-    public $token;
+    public $url;
 
     /**
      * Create a new message instance.
@@ -26,7 +27,9 @@ class NewUserWelcome extends Mailable implements ShouldQueue
         $this->user = $user;
 
         // Generate a new reset password token
-        $this->token = app('auth.password.broker')->createToken($user);
+        $token = app('auth.password.broker')->createToken($user);
+
+        $this->url = url(config('app.url').route('password.reset', ['token' => $token, 'email' => $user->email], false));
     }
 
     /**

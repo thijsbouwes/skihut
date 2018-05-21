@@ -13,7 +13,7 @@
 
 Route::get('/{vue?}', 'PageController@index')
     ->name('index')
-    ->where('vue', '.*');
+    ->where('vue', '[\/\w\.-]*');
 
-Route::get('/confirm/{token}', 'PageController@index')
+Route::get('/confirm/{token}/{email}', 'PageController@index')
     ->name('password.reset');

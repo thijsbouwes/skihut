@@ -92,17 +92,20 @@ export const router = new Router({
         {
             path: '/login',
             name: 'Login',
-            component: Login
+            component: Login,
+            meta: { requiresGuest: true }
         },
         {
-            path: '/confirm/:token',
+            path: '/confirm/:token/:email',
             name: 'confirm',
-            component: ResetPassword
+            component: ResetPassword,
+            meta: { requiresGuest: true }
         },
         {
             path: '/forgot-password',
             name: 'forgot-password',
-            component: ForgotPassword
+            component: ForgotPassword,
+            meta: { requiresGuest: true }
         },
         {
             path: '*',
@@ -126,6 +129,14 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && Auth.isLoggedIn() === false) {
         next('/login');
+    }
+    next();
+});
+
+// Check auth
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresGuest && Auth.isLoggedIn() === true) {
+        next('/');
     }
     next();
 });

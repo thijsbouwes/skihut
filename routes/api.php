@@ -10,10 +10,6 @@
 |
 */
 
-Auth::routes();
-
-//Route::post('/email', 'ForgotPasswordController@sendResetLinkEmailApi');
-
 // password reset routes
 Route::group(['namespace' => 'Auth', 'prefix' => 'password'], function() {
     Route::post('/email', 'ForgotPasswordController@sendResetLinkEmailApi');

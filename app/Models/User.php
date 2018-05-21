@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -38,13 +39,8 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    /**
-     * Set the user's password.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setPasswordAttribute($value) {
-        $this->attributes['password'] = bcrypt($value);
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

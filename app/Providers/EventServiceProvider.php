@@ -17,6 +17,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'Laravel\Passport\Events\AccessTokenCreated' => [
             'App\Listeners\RevokeOldTokens',
+            'App\Listeners\LogSuccessfulLogin',
         ],
 
         'Laravel\Passport\Events\RefreshTokenCreated' => [
@@ -25,7 +26,7 @@ class EventServiceProvider extends ServiceProvider
 
         Registered::class => [
             NewUserWelcomeSendEmail::class
-        ],
+        ]
     ];
 
     /**

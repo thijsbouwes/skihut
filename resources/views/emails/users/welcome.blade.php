@@ -3,15 +3,12 @@
 
 Welcome to {{ config('app.name') }} your account has been created!
 
-![Welcome image](https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif "Logo Title Text 1")
-
-## Token
-{{ $token }}
-
-@component('mail::button', ['url' => config('app.url')])
+@component('mail::button', ['url' => $url])
     Complete Account
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+![Welcome image](https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif "Logo Title Text 1")
+
+Greetings,<br>
+{{ config('app.name') }} - Thijs
 @endcomponent

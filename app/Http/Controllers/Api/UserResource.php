@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UserResource extends Controller
@@ -38,7 +39,7 @@ class UserResource extends Controller
     {
         $user = User::create(array_merge(
             $register_request->validated(),
-            ['password' => str_random(35)]
+            ['password' => Hash::make(str_random(35))]
         ));
 
         event(new Registered($user));

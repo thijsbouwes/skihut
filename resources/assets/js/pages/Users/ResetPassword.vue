@@ -5,7 +5,13 @@
                 <div class="card-content">
                     <span class="card-title">Confirm password</span>
 
-                    <form role="form" method="POST" @submit.prevent="doSubmit()">
+                    <form role="form" method="POST" @submit.prevent="doSubmit()" autocomplete="off">
+                        <div class="input-field">
+                            <i class="material-icons prefix">mail_outline</i>
+                            <label for="email">Email</label>
+                            <input id="email" v-model="user.email" type="email" class="validate" name="email" length="255" maxlength="255" required>
+                        </div>
+
                         <div class="input-field">
                             <i class="material-icons prefix">lock_outline</i>
                             <label for="password">Password</label>
@@ -35,16 +41,18 @@
 <script>
     import ExternalLayout from '../../layouts/external/Layout';
     import RandomBackground from '../../mixins/randomBackground';
+    import ValidationErrors from '../../mixins/validationError';
     import { ENDPOINTS } from '../../config/api';
     import Auth from '../../service/auth-service';
 
     export default {
         components: { ExternalLayout },
-        mixins: [RandomBackground],
+        mixins: [RandomBackground, ValidationErrors],
 
         data() {
             return {
                 user: {
+                    email: '',
                     password: '',
                     password_confirmation: ''
                 }
@@ -53,20 +61,26 @@
 
         created() {
             this.user.token = this.$route.params.token;
+            this.user.email = this.$route.params.email;
         },
 
         methods: {
             doSubmit() {
                 this.$http.post(ENDPOINTS.PASSWORD_RESET, this.user)
                     .then(response => {
-                        console.log(response.data);
+                        Auth.login(this.user.email, this.user.password)
+                            .then(data => {
+                                // Redirect
+                                this.$router.push('/');
+                                this.$M.toast({ html: "Welcome  👋🏼", classes: "green" });
+                            })
+                            .catch(error => {
+                                this.$M.toast({ html: "Error: " + error.response.status + ", " + error.response.data.message, classes: "red" });
+                            });
                     })
                     .catch(error => {
-                        console.log(error);
-                        // Redirect
-                        //this.$router.push('/');
-                        //this.$M.toast({ html: "Invalid token", classes: "red" });
-                    })
+                        this.showErrors(error);
+                    });
             }
         }
     }

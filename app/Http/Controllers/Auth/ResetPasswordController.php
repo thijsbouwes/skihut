@@ -33,7 +33,6 @@ class ResetPasswordController extends Controller
 
     public function resetApi(Request $request)
     {
-        dd($request->email);
         $this->validate($request, $this->rules(), $this->validationErrorMessages());
 
         $response = $this->broker()->reset(

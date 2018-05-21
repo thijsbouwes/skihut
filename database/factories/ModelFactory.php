@@ -3,8 +3,7 @@
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Product;
-use App\Models\EventUser;
-use App\Models\Expense;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Stock;
 
 /*
@@ -30,7 +29,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = Hash::make('secret'),
         'remember_token' => str_random(10),
     ];
 }, 'user');
@@ -40,7 +39,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name' => 'Thijs Bouwes',
         'email' => 'thijsbouwes@gmail.com',
-        'password' => 'secret',
+        'password' => Hash::make('secret'),
         'remember_token' => str_random(10),
     ];
 }, 'admin');
