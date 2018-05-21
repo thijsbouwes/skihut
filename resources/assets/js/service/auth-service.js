@@ -33,8 +33,10 @@ class AuthService {
     }
 
     requestRefreshToken() {
+        let data = {refresh_token: this.getRefreshToken(), grant_type: 'refresh_token'};
+
         // Get refresh token
-        return request.post(ENDPOINTS.LOGIN_REFRESH, {refresh_token: this.getRefreshToken(), grant_type: 'refresh_token'})
+        return request.post(ENDPOINTS.LOGIN_REFRESH, data)
             .then(response => {
                 this.updateTokens(response.data);
                 return Promise.resolve(response);

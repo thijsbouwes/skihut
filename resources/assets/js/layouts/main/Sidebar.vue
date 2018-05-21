@@ -4,7 +4,7 @@
             <li>
                 <div class="user-view">
                     <div class="background">
-                        <img src="https://images.unsplash.com/photo-1458682625221-3a45f8a844c7" title="Example" width="100%">
+                        <img src="/images/backgrounds/background-profile.jpg" title="Example" width="100%">
                     </div>
 
                     <router-link to="/" exact><span class="white-text name">Thijs Bouwes</span></router-link>
