@@ -3,12 +3,13 @@
 
 Welcome to {{ config('app.name') }} your account has been created!
 
+![Welcome image](https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif "Welcome gif")
+
 @component('mail::button', ['url' => $url])
     Complete Account
 @endcomponent
-
-![Welcome image](https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif "Logo Title Text 1")
+*Activation link is 60 minutes valid, after that you have to reset your password!*
 
 Greetings,<br>
-{{ config('app.name') }} - Thijs
+{{ config('app.name') }} - {{ config('app.owner') }}
 @endcomponent

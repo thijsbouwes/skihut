@@ -51,6 +51,9 @@
                         this.$router.push('/login');
                         this.$M.toast({ html: "Check your email", classes: "green" });
                     })
+                    .catch(error => {
+                        this.$M.toast({ html: "Error: no user found", classes: "red" });
+                    })
             }
         }
     }

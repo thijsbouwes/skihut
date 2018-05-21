@@ -7,8 +7,8 @@
                         <img src="/images/backgrounds/background-profile.jpg" title="Example" width="100%">
                     </div>
 
-                    <router-link to="/" exact><span class="white-text name">Thijs Bouwes</span></router-link>
-                    <router-link to="/" exact><span class="white-text email">thijsbouwes@gmail.com</span></router-link>
+                    <router-link to="/" exact><span class="white-text name">{{ user.name }}</span></router-link>
+                    <router-link to="/" exact><span class="white-text email">{{ user.email }}</span></router-link>
                 </div>
             </li>
 
@@ -32,8 +32,25 @@
 <script>
 import Auth from '../../service/auth-service';
 import moment from 'moment';
+import {ENDPOINTS} from "../../config/api";
 
 export default {
+    data() {
+        return {
+            user: {
+                name: '',
+                email: ''
+            }
+        }
+    },
+
+    created() {
+        this.$http.get(ENDPOINTS.USER)
+            .then(response => {
+                this.user = response.data;
+            });
+    },
+
     mounted() {
         // Create sidenav
         let elem = document.querySelector('.sidenav');
