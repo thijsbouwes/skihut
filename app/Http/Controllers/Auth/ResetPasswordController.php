@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -27,13 +31,19 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function resetApi(Request $request)
     {
-        $this->middleware('guest');
+        dd($request->email);
+        $this->validate($request, $this->rules(), $this->validationErrorMessages());
+
+        $response = $this->broker()->reset(
+            $this->credentials($request), function ($user, $password) {
+                $this->resetPassword($user, $password);
+            }
+        );
+
+        $status_code = $response === Password::PASSWORD_RESET ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST;
+
+        return new JsonResponse(null, $status_code);
     }
 }

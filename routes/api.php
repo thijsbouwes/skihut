@@ -10,26 +10,14 @@
 |
 */
 
-//Auth::routes();
+Auth::routes();
 
-Route::get('/test-reset', function() {
-    //$this->validateEmail($request);
-
-    // We will send the password reset link to this user. Once we have attempted
-    // to send the link, we will examine the response then see the message we
-    // need to show to the user. Finally, we'll send out a proper response.
-    $response = \Illuminate\Support\Facades\Password::broker()->sendResetLink(['email' => 'info@computer4life.nl']);
-    dd($response);
-
-    return $response == Password::RESET_LINK_SENT
-        ? $this->sendResetLinkResponse($response)
-        : $this->sendResetLinkFailedResponse($request, $response);
-});
+//Route::post('/email', 'ForgotPasswordController@sendResetLinkEmailApi');
 
 // password reset routes
 Route::group(['namespace' => 'Auth', 'prefix' => 'password'], function() {
-    Route::post('/email', 'ForgotPasswordController@sendResetLinkEmail');
-    Route::post('/reset', 'ResetPasswordController@reset');
+    Route::post('/email', 'ForgotPasswordController@sendResetLinkEmailApi');
+    Route::post('/reset', 'ResetPasswordController@resetApi');
 });
 
 Route::group(['namespace' => 'Api'], function() {

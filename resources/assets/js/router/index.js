@@ -10,7 +10,8 @@ import Products from '../pages/products';
 import CreateProduct from '../pages/products/Create';
 import UpdateProduct from '../pages/products/Update';
 import Login from '../pages/Login';
-import Confirm from '../pages/Users/Confirm';
+import ResetPassword from '../pages/Users/ResetPassword';
+import ForgotPassword from '../pages/Users/ForgotPassword';
 import NotFound from '../pages/NotFound';
 import Auth from '../service/auth-service';
 import Layout from '../layouts/main/Layout';
@@ -96,7 +97,12 @@ export const router = new Router({
         {
             path: '/confirm/:token',
             name: 'confirm',
-            component: Confirm
+            component: ResetPassword
+        },
+        {
+            path: '/forgot-password',
+            name: 'forgot-password',
+            component: ForgotPassword
         },
         {
             path: '*',

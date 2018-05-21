@@ -3,23 +3,17 @@
         <div class="banner full-height center-panel" :style="randomBackground">
             <div class="card">
                 <div class="card-content">
-                    <span class="card-title">Welcome {{ user.name }}</span>
+                    <span class="card-title">Forgot password</span>
 
                     <form role="form" method="POST" @submit.prevent="doSubmit()">
                         <div class="input-field">
-                            <i class="material-icons prefix">lock_outline</i>
-                            <label for="password">Password</label>
-                            <input id="password" v-model="user.password" type="password" class="validate" name="password" length="255" maxlength="255" minlength="8" required>
-                        </div>
-
-                        <div class="input-field">
-                            <i class="material-icons prefix">lock_outline</i>
-                            <label for="password_confirmation">Password confirmation</label>
-                            <input id="password_confirmation" v-model="user.password_confirmation" type="password" class="validate" name="password_confirmation" length="255" maxlength="255" minlength="8" required>
+                            <i class="material-icons prefix">mail_outline</i>
+                            <label for="email">Email</label>
+                            <input id="email" v-model="user.email" type="email" class="form-control" name="email" length="255" maxlength="255" required autofocus>
                         </div>
 
                         <div class="input-field center-align">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Update</button>
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Reset password</button>
                         </div>
 
                         <div class="center-align hide-on-large-only">
@@ -45,21 +39,14 @@
         data() {
             return {
                 user: {
-                    email: 'info@computer4life.nl',
-                    name: 'Thijs',
-                    password: '',
-                    password_confirmation: ''
+                    email: ''
                 }
             }
         },
 
-        created() {
-            this.user.token = this.$route.params.token;
-        },
-
         methods: {
             doSubmit() {
-                this.$http.post(ENDPOINTS.PASSWORD_RESET, this.user)
+                this.$http.post(ENDPOINTS.FORGOT_PASSWORD, this.user)
                     .then(response => {
                         console.log(response.data);
                     })

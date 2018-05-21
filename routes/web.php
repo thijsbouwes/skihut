@@ -15,5 +15,5 @@ Route::get('/{vue?}', 'PageController@index')
     ->name('index')
     ->where('vue', '.*');
 
-Route::get('/{token}', 'PageController@index')
+Route::get('/confirm/{token}', 'PageController@index')
     ->name('password.reset');
