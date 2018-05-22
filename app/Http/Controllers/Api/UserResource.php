@@ -20,7 +20,7 @@ class UserResource extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
+        $users = User::orderBy('created_at', 'DESC')->paginate();
 
         return new JsonResponse($users);
     }

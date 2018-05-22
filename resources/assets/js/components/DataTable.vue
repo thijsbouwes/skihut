@@ -72,8 +72,7 @@
                 type: Object,
                 default: function() {
                     return {
-                        update: true,
-                        delete: true,
+                        edit: true,
                         create: true
                     }
                 }

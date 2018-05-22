@@ -21,7 +21,7 @@
 
                             <div class="input-field col s12 m3 l4">
                                 <i class="material-icons prefix">event</i>
-                                <input type="text" class="datepicker" v-model="event.created_at" required>
+                                <input type="text" class="datepicker" required @change="updateDate()">
                             </div>
                         </div>
 
@@ -115,6 +115,7 @@
 
         data() {
             return {
+                date_instance: {},
                 number_of_users: 0,
                 number_of_products: 0,
                 products: [],
@@ -179,11 +180,12 @@
         mounted() {
             let date_elem = document.querySelector('.datepicker');
             let date_option = {
-                format: 'yyyy-mm-dd hh',
+                format: 'yyyy-mm-dd',
                 defaultDate: new Date(),
-                setDefaultDate: true
+                setDefaultDate: true,
+                autoClose: true
             };
-            let date_instance = this.$M.Datepicker.init(date_elem, date_option);
+            this.date_instance = this.$M.Datepicker.init(date_elem, date_option);
 
             let selec_elem = document.querySelectorAll('select');
             let selec_instance = this.$M.FormSelect.init(selec_elem);
@@ -200,6 +202,10 @@
                     // update fields
                     this.$M.updateTextFields();
                 });
+            },
+
+            updateDate() {
+                this.event.event_date = this.$moment(this.date_instance.date).format('YYYY-MM-DD');
             },
 
             doSubmit() {

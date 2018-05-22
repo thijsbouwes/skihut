@@ -17,7 +17,7 @@ class EventResource extends Controller
      */
     public function index()
     {
-        $events = Event::orderBy('created_at', 'DESC')->paginate();
+        $events = Event::orderBy('event_date', 'DESC')->paginate();
 
         return new JsonResponse($events);
     }

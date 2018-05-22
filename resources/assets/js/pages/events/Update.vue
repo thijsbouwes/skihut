@@ -20,7 +20,7 @@
             return {
                 event: {
                     name: "",
-                    created_at: "",
+                    event_date: "",
                     price: 0,
                     users: [],
                     products: [],

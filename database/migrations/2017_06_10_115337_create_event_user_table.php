@@ -41,8 +41,7 @@ class CreateEventUserTable extends Migration
     public function down()
     {
         Schema::table('event_user', function(Blueprint $table) {
-            $table->dropForeign('event_user_event_id_foreign');
-            $table->dropForeign('event_user_user_id_foreign');
+            $table->dropForeign(['event_id', 'user_id']);
         });
         Schema::dropIfExists('event_user');
     }

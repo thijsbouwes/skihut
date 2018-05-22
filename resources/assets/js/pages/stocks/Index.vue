@@ -1,7 +1,7 @@
 <template>
     <section>
         <data-table
-            endpoint="events"
+            endpoint="stocks"
             :columns="columns"
         ></data-table>
     </section>
@@ -9,11 +9,9 @@
 
 <script>
     import DataTable from '../../components/DataTable';
-    import Layout from "../../layouts/main/Layout";
 
     export default {
         components: {
-            Layout,
             DataTable
         },
 
@@ -21,16 +19,12 @@
             return {
                 columns: [
                     {
-                        name: 'Naam',
+                        name: 'Name',
                         data_name: 'name'
                     },
                     {
-                        name: 'Prijs',
-                        data_name: 'price'
-                    },
-                    {
                         name: 'Datum',
-                        data_name: 'event_date'
+                        data_name: 'order_date'
                     }
                 ]
             }

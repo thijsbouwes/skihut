@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventProductTable extends Migration
+class CreateProductStockTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateEventProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_product', function (Blueprint $table) {
+        Schema::create('product_stock', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('event_id')->unsigned();
+            $table->integer('stock_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->integer('quantity')->unsigned();
             $table->timestamps();
 
             $table
-                ->foreign('event_id')
+                ->foreign('stock_id')
                 ->references('id')
-                ->on('events')
+                ->on('stocks')
                 ->onDelete('cascade');
 
             $table
@@ -41,9 +41,9 @@ class CreateEventProductTable extends Migration
      */
     public function down()
     {
-        Schema::table('event_product', function(Blueprint $table) {
-            $table->dropForeign(['event_id', 'product_id']);
+        Schema::table('product_stock', function(Blueprint $table) {
+            $table->dropForeign(['product_id', 'stock_id']);
         });
-        Schema::dropIfExists('event_product');
+        Schema::dropIfExists('product_stock');
     }
 }

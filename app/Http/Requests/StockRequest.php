@@ -24,7 +24,11 @@ class StockRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'required|numeric'
+            'name'       => 'required|max:255',
+            'order_date' => 'required|date_format:Y-m-d',
+            'products'   => 'array',
+                'products.*.id'       => 'required|exists:products,id',
+                'products.*.quantity' => 'required|numeric',
         ];
     }
 }

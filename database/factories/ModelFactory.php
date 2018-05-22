@@ -27,43 +27,33 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = Hash::make('secret'),
+        'name'           => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'password'       => $password ?: $password = Hash::make('secret'),
         'remember_token' => str_random(10),
     ];
 }, 'user');
 
 $factory->define(User::class, function (Faker\Generator $faker) {
-
     return [
-        'name' => 'Thijs Bouwes',
-        'email' => 'thijsbouwes@gmail.com',
-        'password' => Hash::make('secret'),
+        'name'           => 'Thijs Bouwes',
+        'email'          => 'thijsbouwes@gmail.com',
+        'password'       => Hash::make('secret'),
         'remember_token' => str_random(10),
     ];
 }, 'admin');
 
 $factory->define(Event::class, function (Faker\Generator $faker) {
-
     return [
-        'name' => $faker->sentence(3),
-        'price' => $faker->randomFloat(2, 5, 100)
+        'name'       => $faker->sentence(3),
+        'event_date' => $faker->date(),
+        'price'      => $faker->randomFloat(2, 5, 100)
     ];
 });
 
 $factory->define(Product::class, function (Faker\Generator $faker) {
-
     return [
-        'name' => $faker->name,
+        'name'  => $faker->name,
         'price' => $faker->randomFloat(2, 5, 100)
-    ];
-});
-
-$factory->define(Stock::class, function (Faker\Generator $faker) {
-
-    return [
-        'product_id' => $faker->numberBetween(1, NUMBER_OF_RECORDS),
-        'quantity' => $faker->randomFloat(2, 5, 100)
     ];
 });

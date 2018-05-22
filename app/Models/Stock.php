@@ -6,20 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
+    protected $with = [
+        'products'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'quantity'
+        'name',
+        'order_date'
     ];
 
     /**
      * Get the product that owns Stock.
      */
-    public function product()
+    /**
+     * Get the event products.
+     */
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 }

@@ -38,6 +38,6 @@ class Product extends Model
      */
     public function stocks()
     {
-        return $this->hasMany(Stock::class);
+        return $this->belongsToMany(Stock::class);
     }
 }

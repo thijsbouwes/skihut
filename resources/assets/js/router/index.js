@@ -9,6 +9,9 @@ import UpdateEvent from '../pages/events/Update';
 import Products from '../pages/products';
 import CreateProduct from '../pages/products/Create';
 import UpdateProduct from '../pages/products/Update';
+import Stocks from '../pages/stocks';
+import CreateStock from '../pages/stocks/Create';
+import UpdateStock from '../pages/stocks/Update';
 import Login from '../pages/Login';
 import ResetPassword from '../pages/Users/ResetPassword';
 import ForgotPassword from '../pages/Users/ForgotPassword';
@@ -86,6 +89,28 @@ export const router = new Router({
                     path: 'update/:id',
                     name: 'products.update',
                     component: UpdateProduct
+                }
+            ]
+        },
+        {
+            path: '/stocks',
+            component: Layout,
+            meta: { requiresAuth: true, requiresAdmin: true },
+            children: [
+                {
+                    path: '',
+                    name: 'stocks',
+                    component: Stocks,
+                },
+                {
+                    path: 'create',
+                    name: 'stocks.create',
+                    component: CreateStock
+                },
+                {
+                    path: 'update/:id',
+                    name: 'stocks.update',
+                    component: UpdateStock
                 }
             ]
         },

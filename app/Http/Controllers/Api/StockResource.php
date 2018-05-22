@@ -13,12 +13,11 @@ class StockResource extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param Product $product
      * @return JsonResponse
      */
-    public function index(Product $product)
+    public function index()
     {
-        $stocks = $product->stocks()->paginate();
+        $stocks = Stock::orderBy('order_date', 'DESC')->paginate();
 
         return new JsonResponse($stocks);
     }
@@ -35,19 +34,19 @@ class StockResource extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Product $product
      * @param StockRequest $createRequest
      * @return JsonResponse
      */
-    public function store(Product $product, StockRequest $createRequest)
+    public function store(StockRequest $createRequest)
     {
-        $stock = $product->stocks()->create(
+        $stock = Stock::create(
             $createRequest->all()
         );
 
+        $this->syncProducts($createRequest->get('products'), $stock);
+
         return new JsonResponse($stock, Response::HTTP_CREATED);
     }
-
 
     /**
      * Update the specified resource in storage
@@ -61,6 +60,8 @@ class StockResource extends Controller
             $updateRequest->all()
         );
 
+        $this->syncProducts($updateRequest->get('products'), $stock);
+
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
@@ -68,11 +69,30 @@ class StockResource extends Controller
      * Remove the specified resource from storage.
      * @param Stock $stock
      * @return JsonResponse
+     * @throws \Exception
      */
     public function destroy(Stock $stock)
     {
         $stock->delete();
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param $products_request
+     * @param $stock
+     */
+    private function syncProducts($products_request, $stock)
+    {
+        // create product expenses
+        $products = collect($products_request)->mapWithKeys(function($product) {
+            return [
+                $product['id'] => [
+                    'quantity' => $product['quantity']
+                ]
+            ];
+        })->toArray();
+
+        $stock->products()->sync($products);
     }
 }

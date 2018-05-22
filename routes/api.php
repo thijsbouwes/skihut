@@ -38,13 +38,15 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
         Route::delete('/{product}', 'ProductResource@destroy');
         Route::patch('/{product}', 'ProductResource@update');
         Route::post('/', 'ProductResource@store');
+    });
 
-        // Product Stock
-        Route::get('/{product}/stocks', 'StockResource@index');
-        Route::post('/{product}/stocks', 'StockResource@store');
-        Route::get('/stocks/{stock}', 'StockResource@show');
-        Route::delete('/stocks/{stock}', 'StockResource@destroy');
-        Route::patch('/stocks/{stock}', 'StockResource@update');
+    // Stock
+    Route::group(['prefix' => 'stocks'], function() {
+        Route::get('/', 'StockResource@index');
+        Route::post('/', 'StockResource@store');
+        Route::get('/{stock}', 'StockResource@show');
+        Route::delete('/{stock}', 'StockResource@destroy');
+        Route::patch('/{stock}', 'StockResource@update');
     });
 
     // Event

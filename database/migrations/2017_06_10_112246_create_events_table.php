@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->float('price', 10, 2);
+            $table->date('event_date');
             $table->timestamps();
         });
     }

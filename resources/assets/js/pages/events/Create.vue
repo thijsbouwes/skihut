@@ -23,7 +23,7 @@
             return {
                 event: {
                     name: "Skihut",
-                    created_at: "",
+                    event_date: "",
                     price: 10,
                     users: [],
                     products: [],

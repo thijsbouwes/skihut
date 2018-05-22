@@ -20,16 +20,17 @@ class EventRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
-     */
+     */w
     public function rules()
     {
         return [
-            'name'     => 'required|max:255',
-            'price'    => 'required|numeric',
-            'products' => 'array',
+            'name'       => 'required|max:255',
+            'price'      => 'required|numeric',
+            'event_date' => 'required|date_format:Y-m-d',
+            'products'   => 'array',
                 'products.*.id'       => 'required|exists:products,id',
                 'products.*.quantity' => 'required|numeric',
-            'users' => 'array',
+            'users'      => 'array',
                 'users.*.id'    => 'required|exists:users,id',
                 'users.*.payed' => 'required|bool'
         ];

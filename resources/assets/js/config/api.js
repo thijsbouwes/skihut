@@ -6,6 +6,7 @@ export const ENDPOINTS = {
     FORGOT_PASSWORD: 'password/email',
     EVENTS: 'events',
     PRODUCTS: 'products',
+    STOCKS: 'stocks',
     USERS: 'users',
     USER: 'user'
 };
