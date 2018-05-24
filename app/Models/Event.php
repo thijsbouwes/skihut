@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $appends = [
+        'total_products_price',
+        'total_revenue',
+        'profit',
+        'total_users'
+    ];
+
     protected $with = [
         'products',
         'users'
@@ -40,5 +47,27 @@ class Event extends Model
         return $this->belongsToMany(Product::class)
             ->withPivot('quantity')
             ->withTimestamps();
+    }
+
+    public function getTotalUsersAttribute()
+    {
+        return $this->users->count();
+    }
+
+    public function getTotalProductsPriceAttribute()
+    {
+        return $this->products->sum(function($product) {
+            return $product->price * $product->quantity;
+        });
+    }
+
+    public function getTotalRevenueAttribute()
+    {
+        return $this->users->count() * $this->price;
+    }
+
+    public function getProfitAttribute()
+    {
+        return $this->total_revenue - $this->total_products_price;
     }
 }

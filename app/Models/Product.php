@@ -6,13 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'parameters' => 'array',
+    protected $appends = [
+        'quantity'
     ];
 
     /**
@@ -30,7 +25,9 @@ class Product extends Model
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 
     /**
@@ -38,6 +35,22 @@ class Product extends Model
      */
     public function stocks()
     {
-        return $this->belongsToMany(Stock::class);
+        return $this->belongsToMany(Stock::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the quantity.
+     *
+     * @return string
+     */
+    public function getQuantityAttribute()
+    {
+        if ($this->pivot) {
+            return $this->pivot->quantity;
+        }
+
+        return 1;
     }
 }

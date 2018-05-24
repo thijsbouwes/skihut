@@ -72,4 +72,13 @@ class ProductResource extends Controller
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function indexWithStock()
+    {
+        $products = Product::with('stocks')->whereHas('stocks', function($query) {
+            $query->where('quantity', '>', 0);
+        })->paginate();
+
+        return new JsonResponse($products);
+    }
 }

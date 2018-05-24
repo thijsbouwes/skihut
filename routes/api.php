@@ -25,10 +25,15 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     // User
     Route::get('/user', 'UserResource@show');
 
+    // Dashboard
+    Route::get('/dashboard', 'DashboardController@index');
+
     // users
     Route::group(['prefix' => 'users'], function() {
         Route::get('/', 'UserResource@index');
         Route::post('/', 'UserResource@register');
+
+        Route::get('/debt', 'UserResource@indexDebt');
     });
 
     // Product
@@ -38,6 +43,8 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
         Route::delete('/{product}', 'ProductResource@destroy');
         Route::patch('/{product}', 'ProductResource@update');
         Route::post('/', 'ProductResource@store');
+
+        Route::get('/stock', 'ProductResource@indexWithStock');
     });
 
     // Stock

@@ -35,6 +35,11 @@
                         data_name: 'email'
                     },
                     {
+                        name: 'Schulden',
+                        data_name: 'debt',
+                        filter: 'formatNumber'
+                    },
+                    {
                         name: 'Datum',
                         data_name: 'created_at'
                     }

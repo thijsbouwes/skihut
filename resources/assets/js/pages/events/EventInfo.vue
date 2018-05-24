@@ -1,5 +1,5 @@
 <template>
-    <div class="row event-info">
+    <div class="row data-info">
         <div class="col l3">
             <div class="card-panel">
                 <div>Total products: <span>{{ event.products.length }}</span></div>

@@ -104,10 +104,7 @@
         created() {
             this.$http.get(ENDPOINTS.PRODUCTS)
                 .then(response => {
-                    this.products = response.data.data.map(product => {
-                        product.quantity = 1;
-                        return product;
-                    });
+                    this.products = response.data.data;
 
                     this.updateSelect();
                 });

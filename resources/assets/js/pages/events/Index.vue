@@ -25,8 +25,18 @@
                         data_name: 'name'
                     },
                     {
+                        name: 'Gebruikers',
+                        data_name: 'total_users'
+                    },
+                    {
                         name: 'Prijs',
-                        data_name: 'price'
+                        data_name: 'price',
+                        filter: 'formatNumber'
+                    },
+                    {
+                        name: 'Winst',
+                        data_name: 'profit',
+                        filter: 'formatNumber'
                     },
                     {
                         name: 'Datum',

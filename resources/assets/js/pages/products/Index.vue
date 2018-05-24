@@ -24,7 +24,8 @@
                     },
                     {
                         name: 'Prijs',
-                        data_name: 'price'
+                        data_name: 'price',
+                        filter: 'formatNumber'
                     },
                     {
                         name: 'Datum',

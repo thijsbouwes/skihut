@@ -33,10 +33,6 @@
                 .then(response => {
                     this.event = response.data;
 
-                    this.event.products = response.data.products.map(product => {
-                        return { quantity: product.pivot.quantity, ...product };
-                    });
-
                     this.event.users = response.data.users.map(user => {
                         return { payed: user.pivot.payed_date !== null, ...user };
                     });

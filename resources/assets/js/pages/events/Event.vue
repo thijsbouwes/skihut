@@ -60,7 +60,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">shopping_cart</i>
-                                <label for="price">Number of products</label>
+                                <label for="number_of_products">Number of products</label>
                                 <input id="number_of_products" type="number" step="1" min="1" class="form-control" name="number_of_products" v-model.number="number_of_products" required>
                             </div>
 
@@ -79,7 +79,7 @@
 
                                     <template v-if="event.products[index]">
                                         <div class="input-field col s4 m4 l3">
-                                            <label for="price">Quantity</label>
+                                            <label for="quantity">Quantity</label>
                                             <input v-model.number="event.products[index].quantity" id="quantity" type="number" step="1" min="1" class="form-control" name="quantity" required>
                                         </div>
 
@@ -158,10 +158,7 @@
         created() {
             this.$http.get(ENDPOINTS.PRODUCTS)
                 .then(response => {
-                    this.products = response.data.data.map(product => {
-                        product.quantity = 1;
-                        return product;
-                    });
+                    this.products = response.data.data;
 
                     this.updateSelect();
                 });

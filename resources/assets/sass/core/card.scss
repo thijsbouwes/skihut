@@ -31,3 +31,11 @@
 .data {
     margin: 2.5em;
 }
+
+.data-info {
+    .card-panel div,
+    .card-content div {
+        display: flex;
+        justify-content: space-between;
+    }
+}

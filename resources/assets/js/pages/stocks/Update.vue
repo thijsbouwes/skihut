@@ -1,16 +1,19 @@
 <template>
     <section>
+        <stock-info :stock="stock"></stock-info>
         <stock :stock="stock" @submit="updateStock">Update {{ stock.name }}</stock>
     </section>
 </template>
 
 <script>
     import Stock from './Stock';
+    import StockInfo from './StockInfo';
     import { ENDPOINTS } from "../../config/api";
 
     export default {
         components: {
-            Stock
+            Stock,
+            StockInfo
         },
 
         data() {
@@ -27,10 +30,6 @@
             this.$http.get(ENDPOINTS.STOCKS + '/' + this.$route.params.id)
                 .then(response => {
                     this.stock = response.data;
-
-                    this.stock.products = response.data.products.map(product => {
-                        return { quantity: product.pivot.quantity, ...product };
-                    });
                 });
         },
 

@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    protected $appends = [
+        'debt'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,6 +41,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class)
             ->withPivot('payed_price', 'payed_date')
             ->withTimestamps();
+    }
+
+    public function getDebtAttribute()
+    {
+        return $this->events()
+            ->wherePivot('payed_date', '=', null)
+            ->sum('price');
     }
 
     public function sendPasswordResetNotification($token)

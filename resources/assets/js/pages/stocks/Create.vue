@@ -1,11 +1,13 @@
 <template>
     <section>
+        <stock-info :stock="stock"></stock-info>
         <stock :stock="stock" @submit="saveStock">Create stock</stock>
     </section>
 </template>
 
 <script>
     import Stock from './Stock';
+    import StockInfo from './StockInfo';
     import { ENDPOINTS } from '../../config/api';
     import ValidationErrors from '../../mixins/validationError';
 
@@ -13,7 +15,8 @@
         mixins: [ValidationErrors],
 
         components: {
-            Stock
+            Stock,
+            StockInfo
         },
 
         data() {

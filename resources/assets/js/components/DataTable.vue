@@ -3,7 +3,7 @@
         <div class="card-content">
 
             <span class="card-title">
-                {{ this.endpoint | capitalize }}
+                {{ this.title | capitalize }}
 
                 <router-link
                         :to="{ name: this.endpoint + '.create' }"
@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="row in rows">
-                        <td v-for="column in columns">{{ row[column.data_name] }}</td>
+                        <td v-for="column in columns">{{ dynamicFilter(column.filter, row[column.data_name]) }}</td>
                         <td width="150px" v-if="actions.edit">
                             <router-link v-if="!row.deleted" :to="{ name: endpoint + '.update', params: { id: row.id }}" class="waves-effect waves-white btn-small">
                                 <i class="material-icons">edit</i>
@@ -59,6 +59,10 @@
 <script>
     export default {
         props: {
+            name: {
+                type: String,
+                default: null
+            },
             columns: {
                 required: true,
                 type: Array
@@ -81,6 +85,7 @@
 
         data() {
             return {
+                title: "",
                 search: "",
                 loading: true,
                 current_page: 1,
@@ -99,10 +104,24 @@
         },
 
         created() {
+            if (this.name) {
+                this.title = this.name;
+            } else {
+                this.title = this.endpoint;
+            }
+
             this.getTableData();
         },
 
         methods: {
+            dynamicFilter(filter, value) {
+                if (filter && filter in this.$options.filters) {
+                    return this.$options.filters[filter](value);
+                }
+
+                return value;
+            },
+
             deleteRow(row) {
                 this.$http.delete(this.endpoint + '/' + row.id)
                     .then(() => {
