@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $appends = [
-        'quantity'
+        'quantity',
+        'in_stock_quantity',
+        'quantity_used'
     ];
 
     /**
@@ -40,8 +42,22 @@ class Product extends Model
             ->withTimestamps();
     }
 
+    public function getInStockQuantityAttribute()
+    {
+        $quantity_used = $this->events()->sum('quantity');
+        $quantity_available = $this->stocks()->sum('quantity');
+
+        return $quantity_available - $quantity_used;
+    }
+
+    public function getQuantityUsedAttribute()
+    {
+        return $this->events()->sum('quantity');
+    }
+
     /**
-     * Get the quantity.
+     * Get the quantity, from stock or event depending on the relation.
+     * Default return 1
      *
      * @return string
      */

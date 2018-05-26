@@ -29,7 +29,7 @@ Complete your account now!
 @else
 ### View your details
 You can view your event history and details about upcoming events in your online profile.
-@component('mail::button', ['url' => '#'])
+@component('mail::button', ['url' => '/'])
     View details
 @endcomponent
 @endif

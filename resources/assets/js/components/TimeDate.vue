@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="card">
-            <div class="card-content">
+            <div class="card-content time-date">
                 <slot></slot>
                 <div class="house-item center">
                     <i class="material-icons small">access_time</i>

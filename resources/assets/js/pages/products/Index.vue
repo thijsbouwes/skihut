@@ -19,16 +19,24 @@
             return {
                 columns: [
                     {
-                        name: 'Naam',
+                        name: 'Name',
                         data_name: 'name'
                     },
                     {
-                        name: 'Prijs',
+                        name: 'Price',
                         data_name: 'price',
                         filter: 'formatNumber'
                     },
                     {
-                        name: 'Datum',
+                        name: 'In stock',
+                        data_name: 'in_stock_quantity'
+                    },
+                    {
+                        name: 'Used',
+                        data_name: 'quantity_used'
+                    },
+                    {
+                        name: 'Date',
                         data_name: 'created_at'
                     }
                 ]

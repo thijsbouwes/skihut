@@ -1,26 +1,26 @@
 <template>
     <layout>
         <section>
-            <div class="row">
+            <div class="row data-cards">
                 <div class="col s12 m6 l4 xl3">
                     <time-date></time-date>
                 </div>
                 <div class="col s12 m6 l4 xl3">
                     <number title="Events">
-                        <div>Gepland: <span>{{ dashboard.future_event_count }}</span></div>
-                        <div>Geweest: <span>{{ dashboard.past_event_count }}</span></div>
+                        <div>Future: <span>{{ dashboard.future_event_count }}</span></div>
+                        <div>Past: <span>{{ dashboard.past_event_count }}</span></div>
                     </number>
                 </div>
                 <div class="col s12 m6 l4 xl3">
                     <number title="Stock">
-                        <div>Producten: <span>{{ dashboard.products_in_stock }}</span></div>
-                        <div>Prijs: <span>{{ dashboard.products_in_stock_price | formatNumber }}</span></div>
+                        <div>Products: <span>{{ dashboard.products_in_stock }}</span></div>
+                        <div>Value: <span>{{ dashboard.products_in_stock_price | formatNumber }}</span></div>
                     </number>
                 </div>
                 <div class="col s12 m6 l4 xl3">
                     <number title="Payments">
-                        <div>Omzet: <span>{{ dashboard.revenue | formatNumber }}</span></div>
-                        <div>Openstaand: <span>{{ dashboard.outstanding_money | formatNumber }}</span></div>
+                        <div>Revenue: <span>{{ dashboard.revenue | formatNumber }}</span></div>
+                        <div>Outstanding: <span>{{ dashboard.outstanding_money | formatNumber }}</span></div>
                     </number>
                 </div>
             </div>
@@ -28,18 +28,20 @@
             <div class="row">
                 <div class="col m6">
                     <data-table
-                        name="Gebruiker schulden"
+                        name="Users with debt"
                         endpoint="users/debt"
                         :actions="actions"
                         :columns="debt_columns"
+                        link_to_detail="users.show"
                     ></data-table>
                 </div>
                 <div class="col m6">
                     <data-table
-                        name="Producten of voorraad"
+                        name="Products in stock"
                         endpoint="products/stock"
                         :actions="actions"
                         :columns="stock_columns"
+                        :paginate="false"
                     ></data-table>
                 </div>
             </div>
@@ -77,7 +79,7 @@
                         data_name: 'name'
                     },
                     {
-                        name: 'Schulden',
+                        name: 'Debts',
                         data_name: 'debt',
                         filter: 'formatNumber'
                     }
@@ -88,8 +90,8 @@
                         data_name: 'name'
                     },
                     {
-                        name: 'Hoeveelheid',
-                        data_name: 'quantity'
+                        name: 'In stock quantity',
+                        data_name: 'in_stock_quantity'
                     }
                 ]
             }

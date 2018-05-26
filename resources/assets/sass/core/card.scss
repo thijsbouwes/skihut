@@ -32,9 +32,16 @@
     margin: 2.5em;
 }
 
-.data-info {
+.data-cards {
+    .card {
+        min-height: 135px;
+    }
+    .card-panel {
+        min-height: 125px;
+    }
+
     .card-panel div,
-    .card-content div {
+    .card-content:not(.time-date) div {
         display: flex;
         justify-content: space-between;
     }

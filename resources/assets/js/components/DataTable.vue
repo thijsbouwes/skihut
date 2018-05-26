@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="row in rows">
+                    <tr v-for="row in rows" @click="handleClick(row.id)">
                         <td v-for="column in columns">{{ dynamicFilter(column.filter, row[column.data_name]) }}</td>
                         <td width="150px" v-if="actions.edit">
                             <router-link v-if="!row.deleted" :to="{ name: endpoint + '.update', params: { id: row.id }}" class="waves-effect waves-white btn-small">
@@ -36,7 +36,7 @@
                 </tbody>
             </table>
 
-            <ul class="pagination">
+            <ul class="pagination" v-if="paginate">
                 <li :class="[back ? 'waves-effect' : 'disabled']">
                     <a @click="move(current_page - 1)" href="#!"><i class="material-icons">chevron_left</i></a>
                 </li>
@@ -59,6 +59,14 @@
 <script>
     export default {
         props: {
+            link_to_detail: {
+                type: String,
+                default: null
+            },
+            paginate: {
+                type: Boolean,
+                default: true
+            },
             name: {
                 type: String,
                 default: null
@@ -143,11 +151,22 @@
             getTableData(page_number = 1) {
                 this.$http.get(this.endpoint + `?page=${page_number}` )
                     .then(response => {
-                        this.current_page = response.data.current_page;
-                        this.last_page = response.data.last_page;
-                        this.rows = response.data.data;
+                        if (this.paginate) {
+                            this.current_page = response.data.current_page;
+                            this.last_page = response.data.last_page;
+                            this.rows = response.data.data;
+                        } else {
+                            this.rows = response.data;
+                        }
+
                         this.loading = false;
                     })
+            },
+
+            handleClick(id) {
+                if (this.link_to_detail !== null) {
+                    this.$router.push({ name: this.link_to_detail, params: { id: id }});
+                }
             }
         }
     }

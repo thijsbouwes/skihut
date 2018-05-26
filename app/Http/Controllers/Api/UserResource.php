@@ -29,8 +29,16 @@ class UserResource extends Controller
      * Display the specified resource.
      * @return JsonResponse
      */
-    public function show() {
-        $user = Auth::user();
+    public function show($user_id = null) {
+        $current_user = Auth::user();
+        $user = null;
+
+        // todo check $current_user if admin
+        if ($user_id) {
+            $user = User::with('events')->find($user_id);
+        } else {
+            $user = $current_user;
+        }
 
         return new JsonResponse($user);
     }

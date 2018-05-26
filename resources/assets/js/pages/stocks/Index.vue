@@ -23,16 +23,16 @@
                         data_name: 'name'
                     },
                     {
-                        name: 'Hoeveelheid',
+                        name: 'Total quantity',
                         data_name: 'total_quantity'
                     },
                     {
-                        name: 'Prijs',
+                        name: 'Price',
                         data_name: 'total_products_price',
                         filter: 'formatNumber'
                     },
                     {
-                        name: 'Datum',
+                        name: 'Date',
                         data_name: 'order_date'
                     }
                 ]

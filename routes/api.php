@@ -23,7 +23,7 @@ Route::group(['namespace' => 'Api'], function() {
 
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     // User
-    Route::get('/user', 'UserResource@show');
+    Route::get('/user/{user_id?}', 'UserResource@show');
 
     // Dashboard
     Route::get('/dashboard', 'DashboardController@index');

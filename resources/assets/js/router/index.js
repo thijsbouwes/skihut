@@ -1,20 +1,21 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Dashboard from '../pages/Dashboard';
-import Users from '../pages/Users';
-import CreateUser from '../pages/Users/Create';
-import Events from '../pages/events';
+import Users from '../pages/users/Index';
+import CreateUser from '../pages/users/Create';
+import ShowUser from '../pages/users/Show';
+import Events from '../pages/events/Index';
 import CreateEvent from '../pages/events/Create';
 import UpdateEvent from '../pages/events/Update';
-import Products from '../pages/products';
+import Products from '../pages/products/Index';
 import CreateProduct from '../pages/products/Create';
 import UpdateProduct from '../pages/products/Update';
-import Stocks from '../pages/stocks';
+import Stocks from '../pages/stocks/Index';
 import CreateStock from '../pages/stocks/Create';
 import UpdateStock from '../pages/stocks/Update';
 import Login from '../pages/Login';
-import ResetPassword from '../pages/Users/ResetPassword';
-import ForgotPassword from '../pages/Users/ForgotPassword';
+import ResetPassword from '../pages/users/ResetPassword';
+import ForgotPassword from '../pages/users/ForgotPassword';
 import NotFound from '../pages/NotFound';
 import Auth from '../service/auth-service';
 import Layout from '../layouts/main/Layout';
@@ -45,6 +46,11 @@ export const router = new Router({
                     path: 'create',
                     name: 'users.create',
                     component: CreateUser
+                },
+                {
+                    path: 'account/:id',
+                    name: 'users.show',
+                    component: ShowUser
                 }
             ]
         },

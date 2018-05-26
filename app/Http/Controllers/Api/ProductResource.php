@@ -75,9 +75,23 @@ class ProductResource extends Controller
 
     public function indexWithStock()
     {
-        $products = Product::with('stocks')->whereHas('stocks', function($query) {
-            $query->where('quantity', '>', 0);
-        })->paginate();
+//        $quantity_used = $this->events()->sum('quantity');
+//        $quantity_available = $this->stocks()->sum('quantity');
+
+//        $products = Product::whereHas('stocks', function($query) {
+//            $quantity_used = $query->events()->sum('quantity');
+//
+//            $query->where('quantity', '>', $quantity_used);
+//        })->paginate();
+
+//        return new JsonResponse($products);
+
+        $products = Product::has('stocks')->with(['events', 'stocks'])->get()->filter(function($product) {
+            $quantity_used = $product->events()->sum('quantity');
+            $quantity_available = $product->stocks()->sum('quantity');
+
+            return $quantity_available > $quantity_used;
+        });
 
         return new JsonResponse($products);
     }

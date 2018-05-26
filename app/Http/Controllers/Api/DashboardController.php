@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Event;
+use App\Models\Product;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -21,11 +23,15 @@ class DashboardController extends Controller
         $data['past_event_count'] = Event::whereDate('event_date', '<', Carbon::now())->count();
 
         // stock
-        //$products = Product::all();
-        $data['products_in_stock'] = 10;
-        $data['products_in_stock_price'] = 100;
+        $data['products_in_stock'] = Product::has('stocks')->get()->filter(function($product) {
+            return $product->in_stock_quantity > 0;
+        });
 
         // payments
+        $users = User::whereHas('events', function($query) {
+            $query->where('payed_date', '=', null);
+        })->get();
+
         $data['outstanding_money'] = 100;
         $data['revenue'] = 200;
 

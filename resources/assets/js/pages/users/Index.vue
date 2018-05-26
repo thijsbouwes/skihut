@@ -27,7 +27,7 @@
                 },
                 columns: [
                     {
-                        name: 'Naam',
+                        name: 'Name',
                         data_name: 'name'
                     },
                     {
@@ -35,12 +35,12 @@
                         data_name: 'email'
                     },
                     {
-                        name: 'Schulden',
+                        name: 'Debts',
                         data_name: 'debt',
                         filter: 'formatNumber'
                     },
                     {
-                        name: 'Datum',
+                        name: 'Date',
                         data_name: 'created_at'
                     }
                 ]
