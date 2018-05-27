@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { store } from '../store';
 import Dashboard from '../pages/Dashboard';
 import Users from '../pages/users/Index';
 import CreateUser from '../pages/users/Create';
@@ -27,10 +28,22 @@ export const router = new Router({
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '',
+            meta: { requiresAuth: true },
+            component: Layout,
+            children: [
+                {
+                    path     : '',
+                    name     : 'account',
+                    component: ShowUser
+                }
+            ]
+        },
+        {
+            path: '/dashboard',
             name: 'Dashboard',
             component: Dashboard,
-            meta: { requiresAuth: true }
+            meta: { requiresAuth: true, requiresAdmin: true }
         },
         {
             path: '/users',
@@ -46,6 +59,11 @@ export const router = new Router({
                     path: 'create',
                     name: 'users.create',
                     component: CreateUser
+                },
+                {
+                    path: 'account',
+                    name: 'users.account',
+                    component: ShowUser
                 },
                 {
                     path: 'account/:id',
@@ -152,19 +170,19 @@ router.beforeEach((to, from, next) => {
     let name = to.name.split('.').join(' ');
     name = name.charAt(0).toUpperCase() + name.slice(1);
 
-    document.title = 'Home Comfort | ' + name;
+    document.title = 'Skihut | ' + name;
     next();
 });
 
 // Check auth
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && Auth.isLoggedIn() === false) {
+    if (to.matched.some(record => record.meta.requiresAuth) && Auth.isLoggedIn() === false) {
         next('/login');
     }
     next();
 });
 
-// Check auth
+// Check auth guest
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresGuest && Auth.isLoggedIn() === true) {
         next('/');
@@ -174,8 +192,8 @@ router.beforeEach((to, from, next) => {
 
 // Check admin
 router.beforeEach((to, from, next) => {
-    // if (to.meta.requiresAdmin && store.getters['profile/is_admin'] === false) {
-    //     next('/');
-    // }
+    if (to.matched.some(record => record.meta.requiresAdmin) && store.getters['profile/is_admin'] === false) {
+        next('/');
+    }
     next();
 });

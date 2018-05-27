@@ -3,7 +3,6 @@
 /public/js
 /public/hot
 /public/storage
-!/storage/app/public/images
 /storage/*.key
 /vendor
 /.idea
@@ -12,3 +11,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+!/storage/app/public/images/**

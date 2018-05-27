@@ -57,6 +57,9 @@ class Handler extends ExceptionHandler
             case $exception instanceof NotFoundHttpException:
                 return $this->badRequest('Invalid url');
                 break;
+            case $exception instanceof InvalidAuthorization:
+                return $this->badRequest('Invalid authorization');
+                break;
             default:
                 return parent::render($request, $exception);
         }

@@ -7,18 +7,22 @@
                         <img src="/images/backgrounds/background-profile.jpg" title="Example" width="100%">
                     </div>
 
-                    <router-link to="/" exact><span class="white-text name">{{ user.name }}</span></router-link>
-                    <router-link to="/" exact><span class="white-text email">{{ user.email }}</span></router-link>
+                    <router-link to="/users/account" exact><span class="white-text name">{{ user.name }}</span></router-link>
+                    <router-link to="/users/account" exact><span class="white-text email">{{ user.email }}</span></router-link>
                 </div>
             </li>
 
             <!--Page links-->
-            <router-link tag="li" to="/" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
-            <router-link tag="li" to="/events"><a><i class="material-icons">event</i>Events</a></router-link>
-            <router-link tag="li" to="/products"><a><i class="material-icons">shopping_cart</i>Products</a></router-link>
-            <router-link tag="li" to="/stocks"><a><i class="material-icons">store</i>Stocks</a></router-link>
-            <router-link tag="li" to="/users"><a><i class="material-icons">supervisor_account</i>Users</a></router-link>
-
+            <template v-if="user.is_admin">
+                <router-link tag="li" to="/dashboard" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
+                <router-link tag="li" to="/events"><a><i class="material-icons">event</i>Events</a></router-link>
+                <router-link tag="li" to="/products"><a><i class="material-icons">shopping_cart</i>Products</a></router-link>
+                <router-link tag="li" to="/stocks"><a><i class="material-icons">store</i>Stocks</a></router-link>
+                <router-link tag="li" to="/users"><a><i class="material-icons">supervisor_account</i>Users</a></router-link>
+            </template>
+            <template v-else>
+                <router-link tag="li" to="/users/account" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
+            </template>
 
             <li><div class="divider"></div></li>
 
@@ -32,24 +36,17 @@
 
 <script>
 import Auth from '../../service/auth-service';
-import moment from 'moment';
-import {ENDPOINTS} from "../../config/api";
+import { mapGetters } from 'vuex';
 
 export default {
-    data() {
-        return {
-            user: {
-                name: '',
-                email: ''
-            }
-        }
+    computed: {
+        ...mapGetters({
+            user: 'profile/user',
+        })
     },
 
     created() {
-        this.$http.get(ENDPOINTS.USER)
-            .then(response => {
-                this.user = response.data;
-            });
+        this.$store.dispatch('profile/loadProfile');
     },
 
     mounted() {

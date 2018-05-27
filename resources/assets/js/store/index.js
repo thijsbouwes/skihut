@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import profile from './modules/profile';
 
 Vue.use(Vuex);
 
@@ -13,5 +14,6 @@ const state = {
 export const store = new Vuex.Store({
     state,
     modules: {
+        profile
     }
 });

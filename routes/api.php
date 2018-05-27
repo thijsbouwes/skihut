@@ -24,7 +24,10 @@ Route::group(['namespace' => 'Api'], function() {
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     // User
     Route::get('/user/{user_id?}', 'UserResource@show');
+});
 
+// admin routes
+Route::group(['namespace' => 'Api', 'middleware' => ['auth:api', 'auth.admin']], function() {
     // Dashboard
     Route::get('/dashboard', 'DashboardController@index');
 

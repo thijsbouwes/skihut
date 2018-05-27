@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminResource;
 use App\Http\Middleware\HelloWorld;
 use App\Http\Middleware\InjectClientSecretToRequest;
 use App\Http\Middleware\JsonApi;
@@ -63,6 +64,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'json' => JsonApi::class,
-        'injectSecret' => InjectClientSecretToRequest::class
+        'injectSecret' => InjectClientSecretToRequest::class,
+        'auth.admin' => AdminResource::class
     ];
 }

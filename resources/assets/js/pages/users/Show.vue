@@ -107,10 +107,14 @@
         },
 
         created() {
-            this.$http.get(ENDPOINTS.USER + '/' + this.$route.params.id)
-                .then(response => {
-                    this.user = response.data;
-                });
+            if (this.$route.params.id === false) {
+                this.$http.get(ENDPOINTS.USER + '/' + this.$route.params.id)
+                    .then(response => {
+                        this.user = response.data;
+                    });
+            } else {
+                this.user = this.$store.getters['profile/user'];
+            }
         },
 
         mounted() {
