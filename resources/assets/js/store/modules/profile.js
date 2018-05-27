@@ -9,6 +9,7 @@ const state = {
         id: null,
         name: '',
         email: '',
+        events: [],
         is_admin: false,
         created_at: null
     },

@@ -16,6 +16,7 @@ class AdminResource
      */
     public function handle($request, Closure $next)
     {
+//        dd(Auth::user()->is_admin);
         if (Auth::user()->is_admin === false) {
             throw new InvalidAuthorization();
         }

@@ -37,7 +37,7 @@ class UserResource extends Controller
         if ($user_id) {
             $user = User::with('events')->find($user_id);
         } else {
-            $user = $current_user;
+            $user = $current_user->load('events');
         }
 
         return new JsonResponse($user);
