@@ -5,6 +5,7 @@ export const ENDPOINTS = {
     PASSWORD_RESET: 'password/reset',
     FORGOT_PASSWORD: 'password/email',
     EVENTS: 'events',
+    EVENTS_PAYED: 'events/payed',
     PRODUCTS: 'products',
     STOCKS: 'stocks',
     DASHBOARD: 'dashboard',

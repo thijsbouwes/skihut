@@ -140,7 +140,6 @@
 
             move(page_number) {
                 if (this.current_page === page_number || page_number < 1 || page_number > this.last_page) {
-                    console.log(`error at page ${page_number}`);
                     return;
                 }
 

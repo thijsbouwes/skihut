@@ -13,10 +13,10 @@ class Event extends Model
         'total_users'
     ];
 
-    protected $with = [
-        'products',
-        'users'
-    ];
+//    protected $with = [
+//        'products',
+//        'users'
+//    ];
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +35,7 @@ class Event extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)
-            ->withPivot('payed_price', 'payed_date')
+            ->withPivot('payed')
             ->withTimestamps();
     }
 

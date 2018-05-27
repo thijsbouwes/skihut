@@ -31,8 +31,8 @@ class EventRequest extends FormRequest
                 'products.*.id'       => 'required|exists:products,id',
                 'products.*.quantity' => 'required|numeric',
             'users'      => 'array',
-                'users.*.id'    => 'required|exists:users,id',
-                'users.*.payed' => 'required|bool'
+                'users.*.id'          => 'required|exists:users,id',
+                'users.*.pivot.payed' => 'required|bool'
         ];
     }
 }

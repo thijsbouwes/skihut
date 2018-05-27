@@ -4,6 +4,7 @@
             endpoint="users"
             :columns="columns"
             :actions="actions"
+            link_to_detail="users.show"
         ></data-table>
     </section>
 </template>

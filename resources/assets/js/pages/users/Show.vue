@@ -26,11 +26,12 @@
                 </ul>
             </div>
             <div id="events" class="col s12 l8 offset-l2">
-                <simple-table
-                    :rows="user.events"
+                <event-table
+                    :events="user.events"
                     :columns="event_columns"
-                    name="Events visited"
-                ></simple-table>
+                    :selection="selection"
+                    :user="user_id"
+                ></event-table>
             </div>
             <div id="products" class="col s12 l8 offset-l2">
                 <data-table
@@ -46,16 +47,18 @@
 
 <script>
     import {ENDPOINTS} from "../../config/api";
-    import SimpleTable from "../../components/SimpleTable";
+    import EventTable from "../../components/EventTable";
     import DataTable from "../../components/DataTable";
     import TimeDate from '../../components/TimeDate';
     import Number from '../../components/Number';
 
     export default {
-        components: {SimpleTable, DataTable, TimeDate, Number},
+        components: {EventTable, DataTable, TimeDate, Number},
 
         data() {
             return {
+                selection: false,
+                user_id: null,
                 user: {
                     debt: 0,
                     last_login: 0,
@@ -107,7 +110,10 @@
         },
 
         created() {
-            if (this.$route.params.id === false) {
+            if (typeof this.$route.params.id !== 'undefined') {
+                this.selection = true;
+                this.user_id = this.$route.params.id;
+
                 this.$http.get(ENDPOINTS.USER + '/' + this.$route.params.id)
                     .then(response => {
                         this.user = response.data;

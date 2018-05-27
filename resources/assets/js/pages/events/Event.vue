@@ -48,7 +48,7 @@
                                     <div class="input-field col s4 m4 l2" v-if="event.users[index]">
                                         <p>
                                             <label>
-                                                <input type="checkbox" class="filled-in" v-model="event.users[index].payed"/>
+                                                <input type="checkbox" class="filled-in" v-model="event.users[index].pivot.payed"/>
                                                 <span>Payed</span>
                                             </label>
                                         </p>
@@ -166,7 +166,9 @@
             this.$http.get(ENDPOINTS.USERS)
                 .then(response => {
                     this.users = response.data.data.map(user => {
-                        user.payed = false;
+                        user.pivot = {
+                            payed: false
+                        };
                         return user;
                     });
 

@@ -24,6 +24,11 @@ Route::group(['namespace' => 'Api'], function() {
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     // User
     Route::get('/user/{user_id?}', 'UserResource@show');
+
+    // Product
+    Route::group(['prefix' => 'products'], function() {
+        Route::get('/', 'ProductResource@index');
+    });
 });
 
 // admin routes
@@ -41,7 +46,6 @@ Route::group(['namespace' => 'Api', 'middleware' => ['auth:api', 'auth.admin']],
 
     // Product
     Route::group(['prefix' => 'products'], function() {
-        Route::get('/', 'ProductResource@index');
         Route::get('/{product}', 'ProductResource@show');
         Route::delete('/{product}', 'ProductResource@destroy');
         Route::patch('/{product}', 'ProductResource@update');
@@ -66,5 +70,7 @@ Route::group(['namespace' => 'Api', 'middleware' => ['auth:api', 'auth.admin']],
         Route::delete('/{event}', 'EventResource@destroy');
         Route::patch('/{event}', 'EventResource@update');
         Route::post('/', 'EventResource@store');
+
+        Route::post('/payed/{user}', 'EventResource@payed');
     });
 });

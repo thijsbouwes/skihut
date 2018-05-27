@@ -29,7 +29,7 @@ class DashboardController extends Controller
 
         // payments
         $users = User::whereHas('events', function($query) {
-            $query->where('payed_date', '=', null);
+            $query->where('payed', '=', false);
         })->get();
 
         $data['outstanding_money'] = 100;

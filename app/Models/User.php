@@ -48,14 +48,14 @@ class User extends Authenticatable
     public function events()
     {
         return $this->belongsToMany(Event::class)
-            ->withPivot('payed_price', 'payed_date')
+            ->withPivot('payed')
             ->withTimestamps();
     }
 
     public function getDebtAttribute()
     {
         return $this->events()
-            ->wherePivot('payed_date', '=', null)
+            ->wherePivot('payed', '=', false)
             ->sum('price');
     }
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\EventPayed;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -92,7 +94,7 @@ class EventResource extends Controller
         $users = collect($users_request)->mapWithKeys(function($user) {
             return [
                 $user['id'] => [
-                    'payed_date'  => $user['payed'] ? Carbon::now() : null
+                    'payed'  => $user['pivot']['payed'] ? true : false
                 ]
             ];
         })->toArray();
@@ -116,5 +118,19 @@ class EventResource extends Controller
         })->toArray();
 
         $event->products()->sync($products);
+    }
+
+    /**
+     * @param User       $user
+     * @param EventPayed $event_payed
+     * @return JsonResponse
+     */
+    public function payed(User $user, EventPayed $event_payed)
+    {
+        foreach ($event_payed->get('events') as $event) {
+            $user->events()->updateExistingPivot($event['id'], ['payed' => $event['pivot']['payed']]);
+        }
+
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 }

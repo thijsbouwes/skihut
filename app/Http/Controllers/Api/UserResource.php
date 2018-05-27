@@ -58,7 +58,7 @@ class UserResource extends Controller
     public function indexDebt()
     {
         $users = User::whereHas('events', function($query) {
-            $query->where('payed_date', '=', null);
+            $query->where('payed', '=', false);
         })->paginate();
 
         return new JsonResponse($users);

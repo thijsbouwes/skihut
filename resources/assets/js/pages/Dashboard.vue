@@ -90,8 +90,12 @@
                         data_name: 'name'
                     },
                     {
-                        name: 'In stock quantity',
+                        name: 'In stock',
                         data_name: 'in_stock_quantity'
+                    },
+                    {
+                        name: 'Used',
+                        data_name: 'quantity_used'
                     }
                 ]
             }
