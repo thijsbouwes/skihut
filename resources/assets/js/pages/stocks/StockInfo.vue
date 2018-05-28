@@ -1,6 +1,6 @@
 <template>
     <div class="row data-cards">
-        <div class="col l3">
+        <div class="col s12 m12 l3">
             <div class="card-panel">
                 <div>Total products: <span>{{ stock.products.length }}</span></div>
                 <div>Total quantity: <span>{{ total_products }}</span></div>

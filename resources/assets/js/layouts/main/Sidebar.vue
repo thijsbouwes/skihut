@@ -14,14 +14,14 @@
 
             <!--Page links-->
             <template v-if="user.is_admin">
-                <router-link tag="li" to="/dashboard" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
-                <router-link tag="li" to="/events"><a><i class="material-icons">event</i>Events</a></router-link>
-                <router-link tag="li" to="/products"><a><i class="material-icons">shopping_cart</i>Products</a></router-link>
-                <router-link tag="li" to="/stocks"><a><i class="material-icons">store</i>Stocks</a></router-link>
-                <router-link tag="li" to="/users"><a><i class="material-icons">supervisor_account</i>Users</a></router-link>
+                <router-link tag="li" to="/dashboard" exact><a class="sidenav-close"><i class="material-icons">dashboard</i>Dashboard</a></router-link>
+                <router-link tag="li" to="/events"><a class="sidenav-close"><i class="material-icons">event</i>Events</a></router-link>
+                <router-link tag="li" to="/products"><a class="sidenav-close"><i class="material-icons">shopping_cart</i>Products</a></router-link>
+                <router-link tag="li" to="/stocks"><a class="sidenav-close"><i class="material-icons">store</i>Stocks</a></router-link>
+                <router-link tag="li" to="/users"><a class="sidenav-close"><i class="material-icons">supervisor_account</i>Users</a></router-link>
             </template>
             <template v-else>
-                <router-link tag="li" to="/" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
+                <router-link tag="li" to="/" exact><a class="sidenav-close"><i class="material-icons">dashboard</i>Dashboard</a></router-link>
             </template>
 
             <li><div class="divider"></div></li>

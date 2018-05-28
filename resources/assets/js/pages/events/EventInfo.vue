@@ -1,6 +1,6 @@
 <template>
     <div class="row data-cards">
-        <div class="col l3">
+        <div class="col s12 m6 l3">
             <div class="card-panel">
                 <div>Total products: <span>{{ event.products.length }}</span></div>
                 <div>Total quantity: <span>{{ total_products }}</span></div>
@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <div class="col l3">
+        <div class="col s12 m6 l3">
             <div class="card-panel">
                 <div>Total users: <span>{{ event.users.length }}</span></div>
                 <div>Revenue: <span>{{ total_revenue | formatNumber }}</span></div>
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="col l3">
+        <div class="col s12 m6 l3">
             <div class="card-panel">
                 <div>Costs: <span>{{ total_products_price | formatNumber }}</span></div>
                 <div>Revenue: <span>{{ total_revenue | formatNumber }}</span></div>
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="col l3">
+        <div class="col s12 m6 l3">
             <div class="card-panel">
                 <div>Recommended price: <span>{{ recommended_price | formatNumber }}</span></div>
             </div>

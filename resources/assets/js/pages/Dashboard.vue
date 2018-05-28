@@ -26,7 +26,7 @@
             </div>
 
             <div class="row">
-                <div class="col m6">
+                <div class="col s12 l6">
                     <data-table
                         name="Users with debt"
                         endpoint="users/debt"
@@ -35,7 +35,7 @@
                         link_to_detail="users.show"
                     ></data-table>
                 </div>
-                <div class="col m6">
+                <div class="col s12 l6">
                     <data-table
                         name="Products in stock"
                         endpoint="products/stock"
