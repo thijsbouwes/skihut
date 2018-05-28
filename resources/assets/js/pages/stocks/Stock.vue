@@ -32,7 +32,7 @@
                                             <option value="" disabled>Choose your option</option>
                                             <option v-for="product in products"
                                                     :value="product.id"
-                                                    :disabled="isProductDisabled(product, index)"
+                                                    :disabled="product.selected && product_ids[index] !== product.id"
                                             > {{ product.name }} ({{product.price}}) </option>
                                         </select>
                                         <label>Product {{ number }}</label>
@@ -154,16 +154,8 @@
                 let product_id = this.product_ids[index_select_id];
                 this.$set(this.stock.products, index_select_id, this.products.find(product => product.id === product_id));
                 this.stock.products[index_select_id].selected = true;
-            },
 
-            isProductDisabled(product, index) {
-                let disabled = product.selected && this.product_ids[index] !== product.id;
-
-                if (disabled) {
-                    this.updateSelect();
-                }
-
-                return disabled;
+                this.updateSelect();
             }
         }
     }

@@ -39,7 +39,7 @@
                                             <option value="" disabled>Choose your option</option>
                                             <option v-for="user in users"
                                                     :value="user.id"
-                                                    :disabled="isUserDisabled(user, index)"
+                                                    :disabled="user.selected && user_ids[index] !== user.id"
                                                     :key="user.id"
                                             >{{ user.name }}</option>
                                         </select>
@@ -72,7 +72,7 @@
                                             <option value="" disabled>Choose your option</option>
                                             <option v-for="product in products"
                                                     :value="product.id"
-                                                    :disabled="isProductDisabled(product, index)"
+                                                    :disabled="product.selected && product_ids[index] !== product.id"
                                                     :key="product.id"
                                             > {{ product.name }} ({{product.price}}) </option>
                                         </select>
@@ -223,6 +223,8 @@
                 let product_id = this.product_ids[index_select_id];
                 this.$set(this.event.products, index_select_id, this.products.find(product => product.id === product_id));
                 this.event.products[index_select_id].selected = true;
+
+                this.updateSelect();
             },
 
             setUser(index_select_id) {
@@ -235,26 +237,8 @@
                 let user_id = this.user_ids[index_select_id];
                 this.$set(this.event.users, index_select_id, this.users.find(user => user.id === user_id));
                 this.event.users[index_select_id].selected = true;
-            },
 
-            isProductDisabled(product, index) {
-                let disabled = product.selected && this.product_ids[index] !== product.id;
-
-                if (disabled) {
-                    this.updateSelect();
-                }
-
-                return disabled;
-            },
-
-            isUserDisabled(user, index) {
-                let disabled = user.selected && this.user_ids[index] !== user.id;
-
-                if (disabled) {
-                    this.updateSelect();
-                }
-
-                return disabled;
+                this.updateSelect();
             }
         }
     }
