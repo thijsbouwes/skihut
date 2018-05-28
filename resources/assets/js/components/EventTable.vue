@@ -4,34 +4,42 @@
 
             <span class="card-title">Events visited</span>
 
-            <table class="striped responsive-table">
-                <thead>
-                    <tr>
-                        <th v-if="selection">
-                            <p><label><input type="checkbox" class="filled-in" v-model="selectAllState" @change="selectAll"/><span></span></label></p>
-                        </th>
-                        <th v-for="column in columns"
-                            v-text="column.name"
-                        ></th>
-                        <th>Payed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr></tr>
-                    <tr v-for="event in events">
-                        <td v-if="selection">
-                            <p><label>
-                                <input type="checkbox" class="filled-in" v-model="event.pivot.payed"/>
-                                <span></span>
-                            </label></p>
-                        </td>
-                        <td v-for="column in columns">{{ dynamicFilter(column.filter, event[column.data_name]) }}</td>
-                        <td v-html="payedIcon(event.pivot.payed)"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col s12">
+                    <table class="striped responsive-table events">
+                        <thead>
+                        <tr>
+                            <th v-if="selection">
+                                <p><label><input type="checkbox" class="filled-in" v-model="selectAllState" @change="selectAll"/><span></span></label></p>
+                            </th>
+                            <th v-for="column in columns"
+                                v-text="column.name"
+                            ></th>
+                            <th>Payed</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr></tr>
+                        <tr v-for="event in events">
+                            <td v-if="selection">
+                                <p><label>
+                                    <input type="checkbox" class="filled-in" v-model="event.pivot.payed"/>
+                                    <span></span>
+                                </label></p>
+                            </td>
+                            <td v-for="column in columns">{{ dynamicFilter(column.filter, event[column.data_name]) }}</td>
+                            <td v-html="payedIcon(event.pivot.payed)"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-            <button v-if="selection" class="btn waves-effect waves-light modal-action modal-close" @click="saveEventPayments" name="action">Save</button>
+            <div class="row">
+                <div class="col s12">
+                    <button v-if="selection" class="btn waves-effect waves-light" @click="saveEventPayments" name="action">Save</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
