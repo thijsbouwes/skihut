@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="center-align hide-on-large-only">
-                            <router-link tag="span" to="/login" exact><a>Confirm</a></router-link>
+                            <router-link tag="span" to="/login" exact><a>Login</a></router-link>
                         </div>
                     </form>
                 </div>
@@ -75,7 +75,7 @@
                                 this.$M.toast({ html: "Welcome  👋🏼", classes: "green" });
                             })
                             .catch(error => {
-                                this.$M.toast({ html: "Error: " + error.response.status + ", " + error.response.data.message, classes: "red" });
+                                this.$M.toast({ html: "Error: " + error.response.status + ", activation link invalid.", classes: "red" });
                             });
                     })
                     .catch(error => {
