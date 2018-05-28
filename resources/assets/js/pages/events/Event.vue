@@ -82,7 +82,7 @@
                                     <template v-if="event.products[index]">
                                         <div class="input-field col s4 m4 l3">
                                             <label for="quantity">Quantity</label>
-                                            <input v-model.number="event.products[index].quantity" id="quantity" type="number" step="1" min="1" class="form-control" name="quantity" required>
+                                            <input v-model.number="event.products[index].quantity" id="quantity" type="number" step="0.1" min="0.1" class="form-control" name="quantity" required>
                                         </div>
 
                                         <div class="input-field col s2 m4 l3">
