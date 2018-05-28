@@ -7,6 +7,7 @@ Powered by Thijs Bouwes & Laravel.
 ## Setup
 * Pull in this repo
 * Copy the `cp .env.example .env` and configure it
+* Run `php artisan key:generate`
 * Run `composer install && npm install && npm run dev && php artisan migrate`
 * Now we need to setup Laravel Passport with `php artisan passport:client --password`
 * Copy the generated id + key to the `.env CLIENT_ID & CLIENT_SECRET`

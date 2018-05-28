@@ -37,6 +37,7 @@
     import ExternalLayout from '../layouts/external/Layout';
     import RandomBackground from '../mixins/randomBackground';
     import Auth from '../service/auth-service';
+    import {ENDPOINTS} from "../config/api";
 
     export default {
         components: { ExternalLayout },

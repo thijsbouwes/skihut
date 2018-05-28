@@ -25,7 +25,10 @@ const getters = {
 
 // actions
 const actions = {
-    loadProfile({ commit }) {
+    loadProfile({ commit, state }) {
+        if (state.user.id !== null) {
+            return;
+        }
 
         return request.get(ENDPOINTS.USER)
             .then(response => {

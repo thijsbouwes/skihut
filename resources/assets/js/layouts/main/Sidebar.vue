@@ -51,6 +51,10 @@ export default {
         this.sidebar = new M.Sidenav(elem);
     },
 
+    created() {
+        this.$store.dispatch('profile/loadProfile')
+    },
+
     methods: {
         logout() {
             this.sidebar.close();

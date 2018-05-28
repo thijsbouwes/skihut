@@ -192,15 +192,19 @@ router.beforeEach((to, from, next) => {
 
 // Check admin
 router.beforeEach((to, from, next) => {
-    store.dispatch('profile/loadProfile')
-        .then(response => {
-            if (to.matched.some(record => record.meta.requiresAdmin) && store.getters['profile/is_admin'] === false) {
-                next('/');
-            } else {
+    if (to.matched.some(record => record.meta.requiresAdmin)) {
+        store.dispatch('profile/loadProfile')
+            .then(response => {
+                if (store.getters['profile/is_admin'] === false) {
+                    next('/');
+                } else {
+                    next();
+                }
+            })
+            .catch(error => {
                 next();
-            }
-        })
-        .catch(error => {
-            next();
-        });
+            });
+    }
+
+    next();
 });
