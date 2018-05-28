@@ -12,7 +12,12 @@
 */
 
 Route::get('/mailable', function () {
-    $user = \App\Models\User::find(3);
+
+
+//    \App\Jobs\SendInvoices::dispatch();
+
+
+    $user = \App\Models\User::find(1);
 
     $events = $user->events()->where('payed', '=', false)->get();
 

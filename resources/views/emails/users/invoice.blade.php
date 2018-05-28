@@ -16,20 +16,20 @@ Event | Date | Price
     Transfer € {{ number_format($events->sum('price'), 2) }} to Thijs Bouwes NL92 INGB 0655 1554 73
 @endcomponent
 
-![Pay image](https://media.giphy.com/media/xaPhIclaKuBz2/giphy.gif "Pay gif")
+![Pay image]({{ $giphy_url }} "Pay gif")
 
-@if($activate_account)
+@if($user->last_login === null)
 ### Your account isn't active
 If you want to view your event history and details about upcoming events.
 Complete your account now!
-@component('mail::button', ['url' => $activate_account])
+@component('mail::button', ['url' => $url])
     Complete Account
 @endcomponent
 *Activation link is 60 minutes valid, after that you have to reset your password!*
 @else
 ### View your details
 You can view your event history and details about upcoming events in your online profile.
-@component('mail::button', ['url' => '/'])
+@component('mail::button', ['url' => $url])
     View details
 @endcomponent
 @endif
