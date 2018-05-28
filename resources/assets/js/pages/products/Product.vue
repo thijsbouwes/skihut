@@ -16,7 +16,7 @@
                             <div class="input-field col s12 m6">
                                 <i class="material-icons prefix">euro_symbol</i>
                                 <label for="price">Price</label>
-                                <input id="price" type="number" step="0.1" min="0" class="form-control" name="price" v-model="product.price" required>
+                                <input id="price" type="number" step="0.01" min="0" class="form-control" name="price" v-model="product.price" required>
                             </div>
                         </div>
 

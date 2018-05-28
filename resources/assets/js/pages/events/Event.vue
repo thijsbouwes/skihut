@@ -32,7 +32,7 @@
                                 <input id="number_of_users" type="number" step="1" min="1" class="form-control" name="number_of_users" v-model.number="number_of_users" required>
                             </div>
 
-                            <div class="col s12 m6 l6" v-for="(number, index) in number_of_users" :id="index">
+                            <div class="col s12 m6 l6" v-for="(number, index) in number_of_users" :key="index">
                                 <div class="row">
                                     <div class="input-field col s8 m8 l10">
                                         <select v-model="user_ids[index]" required @change="setUser(index)">
@@ -40,6 +40,7 @@
                                             <option v-for="user in users"
                                                     :value="user.id"
                                                     :disabled="isUserDisabled(user, index)"
+                                                    :key="user.id"
                                             >{{ user.name }}</option>
                                         </select>
                                         <label>User {{ number }}</label>
@@ -72,6 +73,7 @@
                                             <option v-for="product in products"
                                                     :value="product.id"
                                                     :disabled="isProductDisabled(product, index)"
+                                                    :key="product.id"
                                             > {{ product.name }} ({{product.price}}) </option>
                                         </select>
                                         <label>Product {{ number }}</label>
