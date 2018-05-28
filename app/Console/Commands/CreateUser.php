@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -40,19 +41,27 @@ class CreateUser extends Command
      */
     public function handle()
     {
-        $user = new User;
+        $data['name']     = $this->ask('What is your name?');
+        $data['email']    = $this->ask('What is your email?');
+        $data['is_admin'] = filter_var($this->choice('Admin user?', ['false', 'true'], 0), FILTER_VALIDATE_BOOLEAN);
+        $data['password'] = Hash::make(str_random(45));
 
-        $user->name = $this->ask('What is your name?');
-        $user->email = $this->ask('What is your email?');
-        $user->is_admin = filter_var($this->choice('Admin user?', ['false', 'true'], 0), FILTER_VALIDATE_BOOLEAN);
-        $user->password = Hash::make(str_random(45));
-
-        Validator::make($data, [
-            'name' => 'required|string',
-            'email' => 'required|unique'
+        $validator = Validator::make($data, [
+            'name'  => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users'
         ]);
 
-        $user->save();
-        $this->info(sprintf('%s is created, with password: ', $user->name, $user->password));
+        if ($validator->fails()) {
+            foreach ($validator->errors()->toArray() as $error) {
+                $this->error($error[0]);
+            }
+
+            return;
+        }
+
+        $user = User::create($data);
+        event(new Registered($user));
+
+        $this->info(sprintf('%s is created, check your email', $data['name']));
     }
 }

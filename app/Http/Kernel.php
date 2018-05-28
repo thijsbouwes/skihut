@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminResource;
-use App\Http\Middleware\HelloWorld;
 use App\Http\Middleware\InjectClientSecretToRequest;
 use App\Http\Middleware\JsonApi;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
