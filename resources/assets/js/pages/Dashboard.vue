@@ -19,7 +19,7 @@
                 </div>
                 <div class="col s12 m6 l4 xl3">
                     <number title="Payments">
-                        <div>Revenue: <span>{{ dashboard.revenue | formatNumber }}</span></div>
+                        <div>Profit: <span>{{ dashboard.profit | formatNumber }}</span></div>
                         <div>Outstanding: <span>{{ dashboard.outstanding_money | formatNumber }}</span></div>
                     </number>
                 </div>
@@ -66,7 +66,7 @@
                     past_event_count: 0,
                     products_in_stock: 0,
                     products_in_stock_price: 0,
-                    revenue: 0,
+                    profit: 0,
                     outstanding_money: 0
                 },
                 actions: {

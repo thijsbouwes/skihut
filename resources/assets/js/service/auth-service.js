@@ -74,7 +74,8 @@ class AuthService {
 
     updateTokens(data) {
         localStorage.setItem('token', data.access_token);
-        localStorage.setItem('token_expires_in', moment().add(data.expires_in, 'seconds').format());
+        let refresh_token_expires_in = data.expires_in * 2;
+        localStorage.setItem('token_expires_in', moment().add(refresh_token_expires_in, 'seconds').format());
         localStorage.setItem('refresh_token', data.refresh_token);
     }
 

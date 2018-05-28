@@ -31,7 +31,7 @@
                 </tbody>
             </table>
 
-            <button class="btn waves-effect waves-light modal-action modal-close" @click="saveEventPayments" name="action">Save</button>
+            <button v-if="selection" class="btn waves-effect waves-light modal-action modal-close" @click="saveEventPayments" name="action">Save</button>
         </div>
     </div>
 </template>

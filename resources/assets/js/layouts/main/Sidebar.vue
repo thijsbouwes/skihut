@@ -7,8 +7,8 @@
                         <img src="/images/backgrounds/background-profile.jpg" title="Example" width="100%">
                     </div>
 
-                    <router-link to="/users/account" exact><span class="white-text name">{{ user.name }}</span></router-link>
-                    <router-link to="/users/account" exact><span class="white-text email">{{ user.email }}</span></router-link>
+                    <span class="white-text name">{{ user.name }}</span>
+                    <span class="white-text email">{{ user.email }}</span>
                 </div>
             </li>
 
@@ -21,7 +21,7 @@
                 <router-link tag="li" to="/users"><a><i class="material-icons">supervisor_account</i>Users</a></router-link>
             </template>
             <template v-else>
-                <router-link tag="li" to="/users/account" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
+                <router-link tag="li" to="/" exact><a><i class="material-icons">dashboard</i>Dashboard</a></router-link>
             </template>
 
             <li><div class="divider"></div></li>
@@ -43,10 +43,6 @@ export default {
         ...mapGetters({
             user: 'profile/user',
         })
-    },
-
-    created() {
-        this.$store.dispatch('profile/loadProfile');
     },
 
     mounted() {

@@ -33,8 +33,7 @@ class UserResource extends Controller
         $current_user = Auth::user();
         $user = null;
 
-        // todo check $current_user if admin
-        if ($user_id) {
+        if ($user_id && $current_user->is_admin) {
             $user = User::with('events')->find($user_id);
         } else {
             $user = $current_user->load('events');

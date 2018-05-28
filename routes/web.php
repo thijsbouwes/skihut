@@ -12,9 +12,9 @@
 */
 
 Route::get('/mailable', function () {
-    $user = \App\Models\User::find(1);
+    $user = \App\Models\User::find(3);
 
-    $events = $user->events()->where('payed_date', '=', null)->get();
+    $events = $user->events()->where('payed', '=', false)->get();
 
     return new App\Mail\UserEventInvoice($user, $events);
 });

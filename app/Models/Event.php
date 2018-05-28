@@ -13,11 +13,6 @@ class Event extends Model
         'total_users'
     ];
 
-//    protected $with = [
-//        'products',
-//        'users'
-//    ];
-
     /**
      * The attributes that are mass assignable.
      *

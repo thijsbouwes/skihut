@@ -18,22 +18,24 @@ class DashboardController extends Controller
     public function index()
     {
         $data = [];
+
         // events
         $data['future_event_count'] = Event::whereDate('event_date', '>=', Carbon::now())->count();
         $data['past_event_count'] = Event::whereDate('event_date', '<', Carbon::now())->count();
 
         // stock
-        $data['products_in_stock'] = Product::has('stocks')->get()->filter(function($product) {
-            return $product->in_stock_quantity > 0;
-        });
+        $products = Product::has('stocks')->with(['stocks', 'events'])->get();
 
-        // payments
-        $users = User::whereHas('events', function($query) {
-            $query->where('payed', '=', false);
-        })->get();
+        $data['products_in_stock'] = $products->sum('in_stock_quantity');
+        $data['products_in_stock_price'] = $products->map(function($product) {
+            return $product->price * $product->in_stock_quantity;
+        })->sum();
 
-        $data['outstanding_money'] = 100;
-        $data['revenue'] = 200;
+        // events
+        $events = Event::has('users')->with(['users', 'products'])->get();
+
+        $data['profit'] = $events->sum('profit');
+        $data['outstanding_money'] = User::has('events')->get()->sum('debt');
 
         return new JsonResponse($data);
     }
