@@ -13,7 +13,9 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/main.js', 'public/js')
     .sass('resources/assets/sass/style.scss', 'public/css')
-    .browserSync('https://skihut.dev');
+    .browserSync({
+        proxy: process.env.MIX_APP_URL
+    });
 
 if (mix.inProduction()) {
     mix.version();

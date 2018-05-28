@@ -1,5 +1,5 @@
 export const ENDPOINTS = {
-    BASE: process.env.NODE_ENV === 'development' ? 'https://skihut.dev/api/' : 'https://skihut.app/api/',
+    BASE: process.env.MIX_API_URL,
     LOGIN: 'oauth/token',
     LOGIN_REFRESH: 'oauth/token',
     PASSWORD_RESET: 'password/reset',

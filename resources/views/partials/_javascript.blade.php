@@ -1,1 +1,1 @@
-<script src="{{ elixir('js/main.js') }}"></script>
+<script src="{{ mix('js/main.js') }}"></script>

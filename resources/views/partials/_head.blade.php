@@ -3,7 +3,7 @@
 <title>{{ config('app.name', 'Skihut') }}</title>
 
 <!-- styles -->
-<link rel="stylesheet" href="{{ elixir("css/style.css") }}">
+<link rel="stylesheet" href="{{ mix("/css/style.css") }}">
 
 <!-- SEO/Marketing -->
 <meta name="keywords" content="Skihut, Dashboard, Event, product & user management"/>

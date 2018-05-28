@@ -119,7 +119,11 @@
                         this.user = response.data;
                     });
             } else {
-                this.user = this.$store.getters['profile/user'];
+                this.$store.dispatch('profile/loadProfile')
+                    .then(response => {
+                        this.user = this.$store.getters['profile/user'];
+                    });
+
             }
         },
 
