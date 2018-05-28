@@ -9,6 +9,7 @@ Powered by Thijs Bouwes & Laravel.
 * Copy the `cp .env.example .env` and configure it
 * Run `php artisan key:generate`
 * Run `composer install && npm install && npm run dev && php artisan migrate`
+* Generate Laravel Passport keys `php artisan passport:keys`
 * Now we need to setup Laravel Passport with `php artisan passport:client --password`
 * Copy the generated id + key to the `.env CLIENT_ID & CLIENT_SECRET`
 * Setup the scheduler in a cron `* * * * * php /path-to-your-wproject/artisan schedule:run >> /dev/null 2>&1`

@@ -11,19 +11,6 @@
 |
 */
 
-Route::get('/mailable', function () {
-
-
-//    \App\Jobs\SendInvoices::dispatch();
-
-
-    $user = \App\Models\User::find(1);
-
-    $events = $user->events()->where('payed', '=', false)->get();
-
-    return new App\Mail\UserEventInvoice($user, $events);
-});
-
 Route::get('/{vue?}', 'PageController@index')
     ->name('index')
     ->where('vue', '[\/\w\.-]*');
