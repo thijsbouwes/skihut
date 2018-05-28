@@ -15,6 +15,12 @@ Vue.filter('formatNumber', value => {
     return number.toLocaleString("nl-NL", options);
 });
 
+Vue.filter('formatDecimal', value => {
+    let number = parseFloat(value);
+    let options = { minimumFractionDigits: 0, style: 'decimal' };
+    return number.toLocaleString("nl-NL", options);
+});
+
 Vue.filter('capitalize', value => {
     if (!value) return '';
     value = value.toString();

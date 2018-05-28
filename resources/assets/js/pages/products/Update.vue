@@ -7,8 +7,11 @@
 <script>
     import Product from './Product';
     import { ENDPOINTS } from "../../config/api";
+    import ValidationErrors from '../../mixins/validationError';
 
     export default {
+        mixins: [ValidationErrors],
+
         components: {
             Product
         },
@@ -26,6 +29,9 @@
             this.$http.get(ENDPOINTS.PRODUCTS + '/' + this.$route.params.id)
                 .then(response => {
                     this.product = response.data;
+                })
+                .catch(error => {
+                    this.showErrors(error);
                 });
         },
 

@@ -25,11 +25,11 @@ class EventRequest extends FormRequest
     {
         return [
             'name'       => 'required|max:255',
-            'price'      => 'required|numeric',
+            'price'      => 'required|numeric|between:0,99999999.99',
             'event_date' => 'required|date_format:Y-m-d',
             'products'   => 'array',
                 'products.*.id'       => 'required|exists:products,id',
-                'products.*.quantity' => 'required|numeric',
+                'products.*.quantity' => 'required|numeric|between:0,4294967295',
             'users'      => 'array',
                 'users.*.id'          => 'required|exists:users,id',
                 'users.*.pivot.payed' => 'required|bool'

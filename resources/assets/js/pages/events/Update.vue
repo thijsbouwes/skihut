@@ -9,8 +9,11 @@
     import Event from './Event';
     import EventInfo from './EventInfo';
     import { ENDPOINTS } from "../../config/api";
+    import ValidationErrors from '../../mixins/validationError';
 
     export default {
+        mixins: [ValidationErrors],
+
         components: {
             Event,
             EventInfo

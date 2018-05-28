@@ -16,12 +16,12 @@
                             <div class="input-field col s12 m6">
                                 <i class="material-icons prefix">euro_symbol</i>
                                 <label for="price">Price</label>
-                                <input id="price" type="number" step="0.01" min="0" class="form-control" name="price" v-model="product.price" required>
+                                <input id="price" type="number" class="form-control" name="price" step="0.01" min="0.01" max="99999999.99" v-model.number="product.price" required>
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <router-link to="/events" class="waves-effect waves-green btn-flat">Cancel</router-link>
+                            <router-link to="/products" class="waves-effect waves-green btn-flat">Cancel</router-link>
                             <button class="btn waves-effect waves-light" type="submit" name="action">Save</button>
                         </div>
                     </form>

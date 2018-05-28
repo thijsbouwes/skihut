@@ -16,7 +16,7 @@
                             <div class="input-field col s12 m3 l4">
                                 <i class="material-icons prefix">euro_symbol</i>
                                 <label for="price">Price</label>
-                                <input id="price" type="number" step="0.1" min="0" class="form-control" name="price" v-model="event.price" required>
+                                <input id="price" type="number" step="0.01" min="0.01" max="99999999.99" class="form-control" name="price" v-model="event.price" required>
                             </div>
 
                             <div class="input-field col s12 m3 l4">
@@ -82,7 +82,7 @@
                                     <template v-if="event.products[index]">
                                         <div class="input-field col s4 m4 l3">
                                             <label for="quantity">Quantity</label>
-                                            <input v-model.number="event.products[index].quantity" id="quantity" type="number" step="0.1" min="0.1" class="form-control" name="quantity" required>
+                                            <input v-model.number="event.products[index].quantity" id="quantity" step="1" min="1" max="4294967295" type="number" class="form-control" name="quantity" required>
                                         </div>
 
                                         <div class="input-field col s2 m4 l3">
