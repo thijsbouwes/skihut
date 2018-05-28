@@ -10,7 +10,6 @@ Powered by Thijs Bouwes & Laravel.
 * Run `composer install && npm install && npm run dev && php artisan migrate`
 * Now we need to setup Laravel Passport with `php artisan passport:client --password`
 * Copy the generated id + key to the `.env CLIENT_ID & CLIENT_SECRET`
-* Make sure to link the storage folder `php artisan storage:link`
 * Setup the scheduler in a cron `* * * * * php /path-to-your-wproject/artisan schedule:run >> /dev/null 2>&1`
 * Also make sure to configure the Supervisor for queues [Laravel queues - supervisor config](https://laravel.com/docs/5.6/queues#supervisor-configuration)
 
