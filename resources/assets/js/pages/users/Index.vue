@@ -41,6 +41,10 @@
                         filter: 'formatNumber'
                     },
                     {
+                        name: 'Last login',
+                        data_name: 'last_login'
+                    },
+                    {
                         name: 'Date',
                         data_name: 'created_at'
                     }

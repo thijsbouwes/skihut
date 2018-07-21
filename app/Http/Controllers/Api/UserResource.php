@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,9 +19,16 @@ class UserResource extends Controller
      * Display a listing of the resource.
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('created_at', 'DESC')->paginate();
+        $all_users = $request->get('all');
+        $users = User::orderBy('created_at', 'DESC');
+
+        if ($all_users) {
+            $users = $users->get();
+        } else {
+            $users = $users->paginate();
+        }
 
         return new JsonResponse($users);
     }

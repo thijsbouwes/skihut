@@ -26,10 +26,9 @@
                         </div>
 
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="col s12">
                                 <i class="material-icons prefix">people</i>
-                                <label for="price">Number of users</label>
-                                <input id="number_of_users" type="number" step="1" min="1" class="form-control" name="number_of_users" v-model.number="number_of_users" required>
+                                <label>Number of users {{ number_of_users }}</label>
                             </div>
 
                             <div class="col s12 m6 l6" v-for="(number, index) in number_of_users" :key="index">
@@ -56,13 +55,17 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col s12 right-align">
+                                <a class="waves-effect waves-light btn" @click=number_of_users-->-</a>
+                                <a class="waves-effect waves-light btn" @click=number_of_users++>+</a>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="col s12">
                                 <i class="material-icons prefix">shopping_cart</i>
-                                <label for="number_of_products">Number of products</label>
-                                <input id="number_of_products" type="number" step="1" min="1" class="form-control" name="number_of_products" v-model.number="number_of_products" required>
+                                <label>Number of products {{ number_of_products }}</label>
                             </div>
 
                             <div class="col s12 m6 l6" v-for="(number, index) in number_of_products" :id="index">
@@ -90,6 +93,11 @@
                                         </div>
                                     </template>
                                 </div>
+                            </div>
+
+                            <div class="col s12 right-align">
+                                <a class="waves-effect waves-light btn" @click=number_of_products-->-</a>
+                                <a class="waves-effect waves-light btn" @click=number_of_products++>+</a>
                             </div>
                         </div>
 
@@ -149,6 +157,10 @@
                         this.product_ids = event.products.map(product => product.id);
                         this.number_of_products = event.products.length;
                     }
+
+                    if (event.event_date) {
+                        this.date_instance.setDate(new Date(event.event_date));
+                    }
                 },
                 deep: true,
                 immediate: true
@@ -158,16 +170,16 @@
         },
 
         created() {
-            this.$http.get(ENDPOINTS.PRODUCTS)
+            this.$http.get(ENDPOINTS.PRODUCTS + '?all=1')
                 .then(response => {
-                    this.products = response.data.data;
+                    this.products = response.data;
 
                     this.updateSelect();
                 });
 
-            this.$http.get(ENDPOINTS.USERS)
+            this.$http.get(ENDPOINTS.USERS + '?all=1')
                 .then(response => {
-                    this.users = response.data.data.map(user => {
+                    this.users = response.data.map(user => {
                         user.pivot = {
                             payed: false
                         };

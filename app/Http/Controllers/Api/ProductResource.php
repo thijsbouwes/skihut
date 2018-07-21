@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ProductResource extends Controller
@@ -14,9 +15,16 @@ class ProductResource extends Controller
      * Display a listing of the resource.
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderby('created_at', 'DESC')->paginate();
+        $all_products = $request->input('all');
+        $products = Product::orderby('created_at', 'DESC');
+
+        if ($all_products) {
+            $products = $products->get();
+        } else {
+            $products = $products->paginate();
+        }
 
         return new JsonResponse($products);
     }
