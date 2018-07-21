@@ -22,9 +22,9 @@
         data() {
             return {
                 event: {
-                    name: "Skihut",
+                    name: "Skihut " + this.$moment().format("dddd"),
                     event_date: "",
-                    price: 10,
+                    price: 5,
                     users: [],
                     products: [],
                 }

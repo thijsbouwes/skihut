@@ -1,6 +1,37 @@
 <template>
     <layout>
         <section>
+            <div class="row">
+                <div class="input-field col s6">
+                    <select v-model="filters.year" @change="fetchDashboard">
+                        <option value="" selected>Choose your option</option>
+                        <option
+                            v-for="(year, index) in yearOptions"
+                            :key="index"
+                            :value="year"
+                        >{{ year }}</option>
+                    </select>
+                    <label>Year</label>
+                </div>
+                <div class="input-field col s6">
+                    <select v-model="filters.month" @change="fetchDashboard">
+                        <option value="" selected>Choose your option</option>
+                        <option
+                            v-for="(month, index) in monthOptions"
+                            :key="index"
+                            :value="month"
+                        >{{ month }}</option>
+                    </select>
+                    <label>Month</label>
+                </div>
+
+                <div class="col s12">
+                    <div class="progress" v-show="loading">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row data-cards">
                 <div class="col s12 m6 l4 xl3">
                     <time-date></time-date>
@@ -8,19 +39,19 @@
                 <div class="col s12 m6 l4 xl3">
                     <number title="Events">
                         <div>Future: <span>{{ dashboard.future_event_count }}</span></div>
-                        <div>Past: <span>{{ dashboard.past_event_count }}</span></div>
-                    </number>
-                </div>
-                <div class="col s12 m6 l4 xl3">
-                    <number title="Stock">
-                        <div>Products: <span>{{ dashboard.products_in_stock }}</span></div>
-                        <div>Value: <span>{{ dashboard.products_in_stock_price | formatNumber }}</span></div>
+                        <div>Total: <span>{{ dashboard.total_event_count }}</span></div>
                     </number>
                 </div>
                 <div class="col s12 m6 l4 xl3">
                     <number title="Payments">
                         <div>Profit: <span>{{ dashboard.profit | formatNumber }}</span></div>
                         <div>Outstanding: <span>{{ dashboard.outstanding_money | formatNumber }}</span></div>
+                    </number>
+                </div>
+                <div class="col s12 m6 l4 xl3">
+                    <number title="Stock">
+                        <div>Products: <span>{{ dashboard.products_in_stock }}</span></div>
+                        <div>Value: <span>{{ dashboard.products_in_stock_price | formatNumber }}</span></div>
                     </number>
                 </div>
             </div>
@@ -61,9 +92,14 @@
 
         data() {
             return {
+                loading: false,
+                filters: {
+                    year: this.$moment().format('YYYY'),
+                    month: this.$moment().format('MMMM')
+                },
                 dashboard: {
                     future_event_count: 0,
-                    past_event_count: 0,
+                    total_event_count: 0,
                     products_in_stock: 0,
                     products_in_stock_price: 0,
                     profit: 0,
@@ -102,10 +138,46 @@
         },
 
         created() {
-            this.$http.get(ENDPOINTS.DASHBOARD)
-                .then(response => {
-                    this.dashboard = response.data;
-                });
+            this.fetchDashboard();
+        },
+
+        mounted() {
+            let elems = document.querySelectorAll('select');
+            let instances = this.$M.FormSelect.init(elems);
+        },
+
+        computed: {
+            yearOptions() {
+                return [2018]
+            },
+
+            monthOptions() {
+                return this.$moment.months();
+            }
+        },
+
+        methods: {
+            fetchDashboard() {
+                if (this.loading) {
+                    return;
+                }
+
+                this.loading = true;
+                let params = {};
+
+                if (this.filters.year) {
+                    params.year = this.filters.year;
+                }
+                if (this.filters.month) {
+                    params.month = this.$moment().month(this.filters.month).format("M");
+                }
+
+                this.$http.get(ENDPOINTS.DASHBOARD, { params } )
+                    .then(response => {
+                        this.dashboard = response.data;
+                        this.loading = false;
+                    });
+            }
         }
     }
 </script>

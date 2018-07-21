@@ -49,11 +49,23 @@ class Event extends Model
         return $this->users->count();
     }
 
+    public function getTotalUsersWithDebtAttribute()
+    {
+        return $this->users()
+            ->wherePivot('payed', '=', false)
+            ->count();
+    }
+
     public function getTotalProductsPriceAttribute()
     {
         return $this->products->sum(function($product) {
             return $product->price * $product->quantity;
         });
+    }
+
+    public function getTotalDebtAttribute()
+    {
+        return $this->total_users_with_debt * $this->price;
     }
 
     public function getTotalRevenueAttribute()

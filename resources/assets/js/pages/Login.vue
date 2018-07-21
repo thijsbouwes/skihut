@@ -52,7 +52,7 @@
                 Auth.login(this.email, this.password)
                     .then(data => {
                         // Redirect
-                        this.$router.push('/');
+                        this.$router.push('/dashboard');
                         this.$M.toast({ html: "Welcome  👋🏼", classes: "green" });
                     })
                     .catch(error => {

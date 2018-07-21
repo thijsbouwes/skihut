@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -15,13 +16,11 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = [];
-
-        // events
-        $data['future_event_count'] = Event::whereDate('event_date', '>=', Carbon::now())->count();
-        $data['past_event_count'] = Event::whereDate('event_date', '<', Carbon::now())->count();
+        $year = $request->input('year');
+        $month = $request->input('month');
 
         // stock
         $products = Product::has('stocks')->with(['stocks', 'events'])->get();
@@ -32,10 +31,22 @@ class DashboardController extends Controller
         })->sum();
 
         // events
-        $events = Event::has('users')->with(['users', 'products'])->get();
+        $events = Event::has('users')->with(['users', 'products']);
 
-        $data['profit'] = $events->sum('profit');
-        $data['outstanding_money'] = User::has('events')->get()->sum('debt');
+        // filter
+        if ($year) {
+            $events = $events->whereYear('event_date', $year);
+        }
+        if ($year && $month) {
+            $events = $events->whereMonth('event_date', $month);
+        }
+
+        $data['profit'] = $events->get()->sum('profit');
+        $data['outstanding_money'] = $events->get()->sum('total_debt');
+
+        // events
+        $data['future_event_count'] = Event::whereDate('event_date', '>=', Carbon::now())->count();
+        $data['total_event_count'] = $events->get()->count();
 
         return new JsonResponse($data);
     }
