@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new SendInvoices())->weekly()->mondays()->at('13:00');
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
