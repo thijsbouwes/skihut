@@ -7,9 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserEventInvoice extends Mailable
+class UserEventInvoice extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, SendGrid;
 
     public $user;
     public $events;
@@ -38,7 +38,11 @@ class UserEventInvoice extends Mailable
             'https://media.giphy.com/media/xaPhIclaKuBz2/giphy.gif',
             'https://media.giphy.com/media/z2R9CvTLQ2lcQ/giphy.gif',
             'https://media.giphy.com/media/3o8doUeyrZAinxcGBi/giphy.gif',
-            'https://media.giphy.com/media/xTk9ZYCKvrTDDcSfKM/giphy.gif'
+            'https://media.giphy.com/media/xTk9ZYCKvrTDDcSfKM/giphy.gif',
+            'https://media.giphy.com/media/xTka04xVPdPVmSis7e/giphy.gif',
+            'https://media.giphy.com/media/tuWADkb2g3PAk/giphy.gif',
+            'https://media.giphy.com/media/l0ErJaDQ2Q3onCenS/giphy.gif',
+            'https://media.giphy.com/media/l0OXXpl20sY9G0uJy/giphy.gif'
         ];
 
         $this->giphy_url = $giphys[array_rand($giphys)];
@@ -51,6 +55,8 @@ class UserEventInvoice extends Mailable
      */
     public function build()
     {
+        $this->addTracking(get_class(), $this->user);
+
         return $this->subject(sprintf('%s invoice 💲', $this->user->name))
             ->markdown('emails.users.invoice');
     }

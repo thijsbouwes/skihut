@@ -11,7 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewUserWelcome extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, SendGrid;
 
     public $user;
 
@@ -39,6 +39,8 @@ class NewUserWelcome extends Mailable implements ShouldQueue
      */
     public function build()
     {
+        $this->addTracking(get_class(), $this->user);
+
         return $this->subject(sprintf('%s Welcome 👋🏼', $this->user->name))
                     ->markdown('emails.users.welcome');
     }
