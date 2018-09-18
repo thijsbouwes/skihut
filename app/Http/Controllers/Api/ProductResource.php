@@ -18,7 +18,7 @@ class ProductResource extends Controller
     public function index(Request $request)
     {
         $all_products = $request->input('all');
-        $products = Product::orderby('created_at', 'DESC');
+        $products = Product::orderby('name', 'ASC');
 
         if ($all_products) {
             $products = $products->get();

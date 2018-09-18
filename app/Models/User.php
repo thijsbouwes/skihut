@@ -48,6 +48,7 @@ class User extends Authenticatable
     public function events()
     {
         return $this->belongsToMany(Event::class)
+            ->orderBy('event_date', 'DESC')
             ->withPivot('payed')
             ->withTimestamps();
     }

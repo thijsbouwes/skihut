@@ -22,7 +22,7 @@ class UserResource extends Controller
     public function index(Request $request)
     {
         $all_users = $request->get('all');
-        $users = User::orderBy('created_at', 'DESC');
+        $users = User::orderBy('name', 'ASC');
 
         if ($all_users) {
             $users = $users->get();
@@ -66,7 +66,7 @@ class UserResource extends Controller
     {
         $users = User::whereHas('events', function($query) {
             $query->where('payed', '=', false);
-        })->paginate();
+        })->orderBy('name', 'ASC')->paginate();
 
         return new JsonResponse($users);
     }
