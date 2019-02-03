@@ -35,6 +35,9 @@ class UserEventInvoice extends Mailable implements ShouldQueue
         }
 
         $giphys = [
+            'https://media.giphy.com/media/s2qXK8wAvkHTO/giphy.gif',
+            'https://media.giphy.com/media/1AhRlncn6qtZJ9LteY/giphy.gif',
+            'https://media.giphy.com/media/l0OWiTdUNM8lUyzUk/giphy.gif',
             'https://media.giphy.com/media/xaPhIclaKuBz2/giphy.gif',
             'https://media.giphy.com/media/z2R9CvTLQ2lcQ/giphy.gif',
             'https://media.giphy.com/media/3o8doUeyrZAinxcGBi/giphy.gif',
@@ -57,7 +60,7 @@ class UserEventInvoice extends Mailable implements ShouldQueue
     {
         $this->addTracking(get_class(), $this->user);
 
-        return $this->subject(sprintf('%s invoice 💲', $this->user->name))
+        return $this->subject(sprintf('%s invoice', $this->user->name))
             ->markdown('emails.users.invoice');
     }
 }

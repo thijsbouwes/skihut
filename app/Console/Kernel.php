@@ -28,6 +28,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new SendInvoices())->weekly()->mondays()->at('13:00');
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
+
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('02:00');
     }
 
     /**

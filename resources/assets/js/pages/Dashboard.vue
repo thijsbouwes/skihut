@@ -148,7 +148,15 @@
 
         computed: {
             yearOptions() {
-                return [2018]
+                let start = this.$moment("2018-01-01");
+                let years = [];
+
+                while (start.isSameOrBefore(this.$moment())) {
+                    years.push(start.format("YYYY"));
+                    start = start.add(1, 'year');
+                }
+
+                return years;
             },
 
             monthOptions() {
