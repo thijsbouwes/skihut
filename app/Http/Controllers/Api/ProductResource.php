@@ -84,8 +84,8 @@ class ProductResource extends Controller
     public function indexWithStock()
     {
         $products = Product::has('stocks')->with(['events', 'stocks'])->get()->filter(function($product) {
-            $quantity_used = $product->events()->sum('quantity');
-            $quantity_available = $product->stocks()->sum('quantity');
+            $quantity_used = $product->events->pluck('pivot.quantity')->sum();
+            $quantity_available = $product->stocks->pluck('pivot.quantity')->sum();
 
             return $quantity_available > $quantity_used;
         });

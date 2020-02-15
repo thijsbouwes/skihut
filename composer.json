@@ -16,11 +16,12 @@
         "spatie/laravel-backup": "5.*"
     },
     "require-dev": {
-        "codeception/phpbuiltinserver": "^1.3",
+        "barryvdh/laravel-debugbar": "^3.2",
         "codeception/codeception": "^2.3",
+        "codeception/phpbuiltinserver": "^1.3",
+        "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
-        "filp/whoops": "~2.0"
+        "mockery/mockery": "0.9.*"
     },
     "autoload": {
         "classmap": [
