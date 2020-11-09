@@ -12,4 +12,6 @@ Welcome to {{ config('app.name') }} your account has been created!
 
 Greetings,<br>
 {{ config('app.name') }} - {{ config('app.owner') }}
+
+<%asm_global_unsubscribe_url%>
 @endcomponent

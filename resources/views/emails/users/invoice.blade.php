@@ -36,4 +36,6 @@ You can view your event history and details about upcoming events in your online
 
 Greetings,<br>
 {{ config('app.name') }} - {{ config('app.owner') }}
+
+<%asm_global_unsubscribe_url%>
 @endcomponent
