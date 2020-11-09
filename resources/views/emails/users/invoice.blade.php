@@ -13,7 +13,7 @@ Event | Date | Price
 @endcomponent
 
 @component('mail::panel')
-    Transfer € {{ number_format($events->sum('price'), 2) }} to Thijs Bouwes NL92 INGB 0655 1554 73
+    Transfer € {{ number_format($events->sum('price'), 2) }} to Thijs Bouwes NL31 ABNA 0872 5296 49
 @endcomponent
 
 ![Pay image]({{ $giphy_url }} "Pay gif")

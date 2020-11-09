@@ -45,7 +45,9 @@ class UserEventInvoice extends Mailable implements ShouldQueue
             'https://media.giphy.com/media/xTka04xVPdPVmSis7e/giphy.gif',
             'https://media.giphy.com/media/tuWADkb2g3PAk/giphy.gif',
             'https://media.giphy.com/media/l0ErJaDQ2Q3onCenS/giphy.gif',
-            'https://media.giphy.com/media/l0OXXpl20sY9G0uJy/giphy.gif'
+            'https://media.giphy.com/media/l0OXXpl20sY9G0uJy/giphy.gif',
+            'https://media.giphy.com/media/h59bxdTKpPqQpScZIh/giphy.gif',
+            'https://media.giphy.com/media/xTk9ZElTYjkQK4uOvC/giphy.gif'
         ];
 
         $this->giphy_url = $giphys[array_rand($giphys)];
