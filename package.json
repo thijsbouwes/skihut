@@ -18,7 +18,7 @@
     "purifycss-webpack": "^0.7.0"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "chart.js": "^2.7.1",
     "materialize-css": "1.0.0-rc.1",
     "moment": "^2.20.1",
